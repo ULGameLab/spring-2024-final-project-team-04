@@ -62,11 +62,29 @@ public class DungeonCreator : MonoBehaviour
             CreateWall(wallParent, wallPosition, wallVertical);
         }
     }
-
     private void CreateWall(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
     {
-        Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
+        // Instantiate the wall prefab
+        GameObject wallObject = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
+
+        // Set the position of the wall
+        wallObject.transform.position = wallPosition;
+
+        // Apply fixed rotation based on wall type
+        if (wallPrefab == wallHorizontal)
+        {
+            // If it's a horizontal wall, rotate it to align with the z-axis
+            
+        }
+        else if (wallPrefab == wallVertical)
+        {
+            // If it's a vertical wall, no rotation is needed
+            wallObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        }
     }
+
+
+
 
     private void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner)
     {

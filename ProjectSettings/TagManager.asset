@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - OuterCorner
   - Room
+  - Heal
   layers:
   - Default
   - TransparentFX

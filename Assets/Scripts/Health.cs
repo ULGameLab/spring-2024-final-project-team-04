@@ -11,10 +11,18 @@ public class Health : MonoBehaviour
     private static Image HealthBarImage;
     private float health = 100.0f;
     private float healVal = 10.0f;
-  
+
+    [SerializeField] FirstPersonController fpc;
+    
+   
+
+   
+
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+
 
         if (HealthBar != null)
         {
@@ -66,10 +74,25 @@ public class Health : MonoBehaviour
             case "Heal":
                 health += healVal;
                 break;
-            
-            
+
+            case "Speed":
+                StartCoroutine(SpeedPotion());
+                break;
+
             default:
                 break;
         }
+    }
+
+
+    private IEnumerator SpeedPotion()
+    {
+        fpc.walkSpeed *= 2;
+        fpc.sprintSpeed *= 2;
+        Debug.Log("Speed Increased");
+        yield return new WaitForSeconds(5.0f);
+        fpc.walkSpeed = (fpc.walkSpeed / 2);
+        fpc.sprintSpeed = (fpc.sprintSpeed / 2);
+        Debug.Log("Speed Reset");
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - OuterCorner
   - Room
   - Heal
+  - Speed
   layers:
   - Default
   - TransparentFX

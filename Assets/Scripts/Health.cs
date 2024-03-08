@@ -8,9 +8,20 @@ public class Health : MonoBehaviour
 {
 
     public GameObject HealthBar;
+    public GameObject ShieldBuff;
+    public GameObject FlashBomb;
     private static Image HealthBarImage;
-    private float health = 100.0f;
+    private float health = 75.0f;
     private float healVal = 10.0f;
+    private int healthPotCount = 0;
+    private int shieldPotCount = 0;
+    public int flashbangCount = 0;
+
+    AudioSource potionDrink;
+
+    public TextMeshProUGUI healthNum;
+    public TextMeshProUGUI shieldNum;
+    public TextMeshProUGUI flashNum;
 
     [SerializeField] FirstPersonController fpc;
     
@@ -23,6 +34,7 @@ public class Health : MonoBehaviour
     public void Start()
     {
 
+        potionDrink = GetComponent<AudioSource>();
 
         if (HealthBar != null)
         {
@@ -30,6 +42,11 @@ public class Health : MonoBehaviour
         }
         SetHealthBarValue(health);
 
+        
+        healthNum.text = healthPotCount.ToString();
+        shieldNum.text = shieldPotCount.ToString();
+        flashNum.text = flashbangCount.ToString();
+        
     }
 
     public static void SetHealthBarValue(float value)
@@ -63,6 +80,28 @@ public class Health : MonoBehaviour
     void Update()
     {
         SetHealthBarValue(health / 100);
+
+        
+        if((Input.GetKeyDown(KeyCode.Alpha1)) && (healthPotCount != 0))
+        {
+            potionDrink.Play();
+            health += healVal;
+            healthPotCount--;
+            healthNum.text = healthPotCount.ToString();
+            Debug.Log("HealthPot Used");
+        }
+        else if ((Input.GetKeyDown(KeyCode.Alpha2)) && (shieldPotCount != 0))
+        {
+            StartCoroutine(ShieldPotion());
+            shieldPotCount--;
+            shieldNum.text = shieldPotCount.ToString();
+            Debug.Log("Shield Potions: " + shieldPotCount.ToString());
+        }
+        else if((Input.GetKeyDown(KeyCode.Alpha3)) && (flashbangCount != 0))
+        {
+            flashbangCount--;
+            flashNum.text = flashbangCount.ToString();
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -72,11 +111,19 @@ public class Health : MonoBehaviour
         {
 
             case "Heal":
-                health += healVal;
+                ++healthPotCount;
+                healthNum.text = healthPotCount.ToString();
                 break;
 
-            case "Speed":
-                StartCoroutine(SpeedPotion());
+            case "Shield":
+                ++shieldPotCount;
+                shieldNum.text = shieldPotCount.ToString();
+                Debug.Log("Shield Potions Collected: " + shieldPotCount.ToString());
+                break;
+
+            case "Flash":
+                ++flashbangCount;
+                flashNum.text = flashbangCount.ToString();
                 break;
 
             default:
@@ -84,7 +131,14 @@ public class Health : MonoBehaviour
         }
     }
 
-
+    private IEnumerator ShieldPotion()
+    {
+        potionDrink.Play();
+        Debug.Log("Shield Potion used");
+        ShieldBuff.SetActive(true);
+        yield return new WaitForSeconds(5.0f);
+        ShieldBuff.SetActive(false);
+    }
     private IEnumerator SpeedPotion()
     {
         fpc.walkSpeed *= 2;

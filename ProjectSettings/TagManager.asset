@@ -10,6 +10,8 @@ TagManager:
   - Room
   - Heal
   - Speed
+  - Shield
+  - Flash
   layers:
   - Default
   - TransparentFX

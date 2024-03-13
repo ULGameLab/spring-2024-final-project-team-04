@@ -12,6 +12,7 @@ TagManager:
   - Speed
   - Shield
   - Flash
+  - Mesh
   layers:
   - Default
   - TransparentFX

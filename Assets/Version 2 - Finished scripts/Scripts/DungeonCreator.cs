@@ -9,7 +9,6 @@ public class DungeonCreator : MonoBehaviour
     public int roomWidthMin, roomLengthMin;
     public int maxIterations;
     public int corridorWidth;
-    public Material material;
     [Range(0.0f, 0.3f)]
     public float roomBottomCornerModifier;
     [Range(0.7f, 1.0f)]
@@ -27,9 +26,9 @@ public class DungeonCreator : MonoBehaviour
     void Start()
     {
         CreateDungeon();
-       
     }
 
+   
     public void CreateDungeon()
     {
         DestroyAllChildren();
@@ -92,10 +91,6 @@ public class DungeonCreator : MonoBehaviour
         }
     }   
 
-
-
-
-
          void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner)
         {
             Vector3 bottomLeftV = new Vector3(bottomLeftCorner.x, 0, bottomLeftCorner.y);
@@ -131,12 +126,12 @@ public class DungeonCreator : MonoBehaviour
             mesh.uv = uvs;
             mesh.triangles = triangles;
 
-            GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer));
+            GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter));
+          
 
             dungeonFloor.transform.position = Vector3.zero;
             dungeonFloor.transform.localScale = Vector3.one;
             dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
-            dungeonFloor.GetComponent<MeshRenderer>().material = material;
             dungeonFloor.transform.parent = transform;
 
             for (int row = (int)bottomLeftV.x; row < (int)bottomRightV.x; row++)

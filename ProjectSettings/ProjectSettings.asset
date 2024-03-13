@@ -4,6 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 27
+  productGUID: 0d6036e5386f03c4bb1bab4c2ea9555e
   productGUID: 61964af0b3814624e8d71f90627f7a88
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
@@ -16,6 +17,7 @@ PlayerSettings:
   productName: spring-2024-final-project-team-04
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
+  m_SplashScreenBackgroundColor: {r: 0.12156863, g: 0.12156863, b: 0.1254902, a: 1}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
@@ -42,6 +44,8 @@ PlayerSettings:
   m_SplashScreenLogos: []
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
+  defaultScreenWidth: 1920
+  defaultScreenHeight: 1080
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
@@ -68,6 +72,7 @@ PlayerSettings:
   disableDepthAndStencilBuffers: 0
   androidStartInFullscreen: 1
   androidRenderOutsideSafeArea: 1
+  androidUseSwappy: 1
   androidUseSwappy: 0
   androidBlitType: 0
   androidResizableWindow: 0
@@ -80,6 +85,7 @@ PlayerSettings:
   androidApplicationEntry: 2
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
+  runInBackground: 0
   runInBackground: 1
   captureSingleScreen: 0
   muteOtherAudioSources: 0
@@ -96,6 +102,8 @@ PlayerSettings:
   resizableWindow: 0
   useMacAppStoreValidation: 0
   macAppStoreCategory: public.app-category.games
+  gpuSkinning: 0
+  meshDeformation: 0
   gpuSkinning: 1
   meshDeformation: 2
   xboxPIXTextureCapture: 0
@@ -119,6 +127,7 @@ PlayerSettings:
   xboxOneDisableEsram: 0
   xboxOneEnableTypeOptimization: 0
   xboxOnePresentImmediateThreshold: 0
+  switchQueueCommandMemory: 1048576
   switchQueueCommandMemory: 0
   switchQueueControlMemory: 16384
   switchQueueComputeMemory: 262144
@@ -137,6 +146,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
+  bundleVersion: 1.0
   bundleVersion: 0.1
   preloadedAssets: []
   metroInputSource: 0
@@ -153,6 +163,7 @@ PlayerSettings:
   useHDRDisplay: 0
   hdrBitDepth: 0
   m_ColorGamuts: 00000000
+  targetPixelDensity: 0
   targetPixelDensity: 30
   resolutionScalingMode: 0
   resetResolutionOnWindowResize: 0
@@ -160,6 +171,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier: {}
+  buildNumber: {}
   buildNumber:
     Bratwurst: 0
     Standalone: 0
@@ -179,6 +191,16 @@ PlayerSettings:
   CreateWallpaper: 0
   androidSplitApplicationBinary: 0
   keepLoadedShadersAlive: 0
+  StripUnusedMeshComponents: 0
+  strictShaderVariantMatching: 0
+  VertexChannelCompressionMask: 4054
+  iPhoneSdkVersion: 988
+  iOSTargetOSVersionString: 
+  tvOSSdkVersion: 0
+  tvOSRequireExtendedGameController: 0
+  tvOSTargetOSVersionString: 
+  bratwurstSdkVersion: 0
+  bratwurstTargetOSVersionString: 
   StripUnusedMeshComponents: 1
   strictShaderVariantMatching: 0
   VertexChannelCompressionMask: 4054
@@ -245,6 +267,9 @@ PlayerSettings:
   iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0
   shaderPrecisionModel: 0
+  clonedFromGUID: 00000000000000000000000000000000
+  templatePackageId: 
+  templateDefaultScene: 
   clonedFromGUID: bdc8d2f1d15a9e443ad2a4c2f11cdcfb
   templatePackageId: 
   templateDefaultScene: Assets/Scenes/SampleScene.unity
@@ -260,6 +285,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
+  AndroidKeystoreName: 
   AndroidKeystoreName: '{inproject}: '
   AndroidKeyaliasName: 
   AndroidEnableArmv9SecurityFeatures: 0
@@ -284,6 +310,12 @@ PlayerSettings:
   AndroidReportGooglePlayAppDependencies: 1
   m_BuildTargetIcons: []
   m_BuildTargetPlatformIcons: []
+  m_BuildTargetBatching: []
+  m_BuildTargetShaderSettings: []
+  m_BuildTargetGraphicsJobs: []
+  m_BuildTargetGraphicsJobMode: []
+  m_BuildTargetGraphicsAPIs: []
+  m_BuildTargetVRSettings: []
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
     m_StaticBatching: 1
@@ -370,6 +402,7 @@ PlayerSettings:
   m_TemplateCustomTags: {}
   mobileMTRendering:
     Android: 1
+    Bratwurst: 1
     iPhone: 1
     tvOS: 1
   m_BuildTargetGroupLightmapEncodingQuality: []
@@ -388,6 +421,7 @@ PlayerSettings:
   locationUsageDescription: 
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
+  macOSTargetOSVersion: 
   macOSTargetOSVersion: 10.13.0
   switchNMETAOverride: 
   switchNetLibKey: 

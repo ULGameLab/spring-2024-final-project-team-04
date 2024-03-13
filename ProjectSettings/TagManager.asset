@@ -8,6 +8,10 @@ TagManager:
   - Wall
   - OuterCorner
   - Room
+  - Heal
+  - Speed
+  - Shield
+  - Flash
   layers:
   - Default
   - TransparentFX

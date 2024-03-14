@@ -11,6 +11,9 @@ TagManager:
   - Heal
   - Speed
   - Shop
+  - Shield
+  - Flash
+  - Mesh
   layers:
   - Default
   - TransparentFX

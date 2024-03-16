@@ -15,10 +15,12 @@ public class DungeonCreator : MonoBehaviour
     public float roomTopCornerMidifier;
     [Range(0, 2)]
     public int roomOffset;
+    //types of walls
     public GameObject wallVertical, wallHorizontal;
     public GameObject floorPrefab;
     public GameObject roofPrefab;
     public GameObject[] decorations;
+    public GameObject[] wallDecorations;
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -29,43 +31,43 @@ public class DungeonCreator : MonoBehaviour
         CreateDungeon();
     }
 
-    //get list of rooms
-    void decorateDungeon(List<Node> listOfRooms)
+    void decorateWalls(Vector3 wallPosition)
     {
-        //destory old game objects 
-        //This wont destroy objects unless game is running
-        foreach (var gameObj in GameObject.FindGameObjectsWithTag("Decor"))
+
+        // pick an item from list //changed
+        int whatDEcor = UnityEngine.Random.Range(0, 7);
+        if (whatDEcor == 1)
         {
-            Destroy(gameObj);
-        }
-
-        // Iterate through each room
-        foreach (var room in listOfRooms)//only fills some rooms!!!!!!!!!
-        {
-            for (int i = 0; i < 1; i++)
-            {
-                //get outline of room
-                float roomLength = Mathf.Abs(room.TopRightAreaCorner.x - room.BottomLeftAreaCorner.x);
-                float roomWidth = Mathf.Abs(room.TopRightAreaCorner.x - room.BottomLeftAreaCorner.x);
-
-                // Get size of the decoration 
-                int whatDEcor = UnityEngine.Random.Range(0, 8);
-                Vector3 decorationSize = decorations[whatDEcor].GetComponent<Renderer>().bounds.size;
-
-                // Calculate random position within the room
-                float xPosition = UnityEngine.Random.Range(room.BottomLeftAreaCorner.x, room.TopRightAreaCorner.x);
-                float zPosition = UnityEngine.Random.Range(room.BottomLeftAreaCorner.x, room.TopRightAreaCorner.x);
-                Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
-
-                // Offset position by half the decoration size so it's centered
-                randomPosition += new Vector3(-decorationSize.x / 2, 0, -decorationSize.z / 2);
-                // Debug.Log(roomLength);
-                // Debug.Log(roomWidth);
-                
-                Instantiate(decorations[whatDEcor], randomPosition, Quaternion.identity);
-            }
+            // Calculate position on the wall
+            Vector3 randomPosition = new Vector3(wallPosition.x, -1f, wallPosition.z);
+            Instantiate(wallDecorations[0], randomPosition, Quaternion.identity);
         }
     }
+            
+    // after a floor/ground for the room is made decorated the room
+    void decorateDungeon(Vector3 floorPosition, Vector3 floorSize)
+    {
+        //change to be based off room size??????
+        int numberOfDecorations = 10; 
+
+        // place decorations
+        for (int i = 0; i < numberOfDecorations; i++)
+        {
+            // random position
+            // The floors (location - half its size) to the floors (location + half its size) in the X/Z axixes
+            float xPosition = UnityEngine.Random.Range(floorPosition.x - floorSize.x / 2f, floorPosition.x + floorSize.x / 2f);
+            float zPosition = UnityEngine.Random.Range(floorPosition.z - floorSize.z / 2f, floorPosition.z + floorSize.z / 2f);
+            Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
+
+            // Pick a random decoration
+            int whatDecor = UnityEngine.Random.Range(0, 8);
+
+            // Instantiate the decoration at the calculated position
+            Instantiate(decorations[whatDecor], randomPosition, Quaternion.identity);
+        
+            }
+        }
+    
     public void CreateDungeon()
     {
         DestroyAllChildren();
@@ -94,41 +96,49 @@ public class DungeonCreator : MonoBehaviour
             CreateFloor(room.BottomLeftAreaCorner, room.TopRightAreaCorner);
             CreateRoof(room.BottomLeftAreaCorner, room.TopRightAreaCorner);
         }
-        decorateDungeon(listOfRooms);
+        
     }
 
          void CreateWalls(GameObject wallParent)
         {
-            foreach (var wallPosition in possibleWallHorizontalPosition)
+           
+        foreach (var wallPosition in possibleWallHorizontalPosition)
             {
-                CreateWall(wallParent, wallPosition, wallHorizontal);
+            
+            CreateWallHorizontal(wallParent, wallPosition, wallHorizontal);      
         }
             foreach (var wallPosition in possibleWallVerticalPosition)
             {
-                CreateWall(wallParent, wallPosition, wallVertical);
+            
+            CreateWallVertical(wallParent, wallPosition, wallVertical);
         }
         }
 
-    void CreateWall(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
+    void CreateWallVertical(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
     {
         // Instantiate the wall prefab
         GameObject wallObject = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
 
         // Set the position of the wall
         wallObject.transform.position = wallPosition;
+        decorateWalls(wallPosition);
 
-        // Apply fixed rotation based on wall type//change with prefabs as needed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        if (wallPrefab == wallHorizontal)
-        {
-            wallObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        }
-        else if (wallPrefab == wallVertical)
-        {
-            wallObject.transform.rotation = Quaternion.identity; // No rotation needed for vertical walls
-        }
-    }   
+    }
 
-         void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner)
+    void CreateWallHorizontal(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
+    {
+        // Instantiate the wall prefab
+        GameObject wallObject = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
+
+        // Set the position of the wall
+        wallObject.transform.position = wallPosition;
+        
+        wallObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        decorateWalls(wallPosition);
+    }
+
+
+    void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner)
         {
             Vector3 bottomLeftV = new Vector3(bottomLeftCorner.x, 0, bottomLeftCorner.y);
             Vector3 bottomRightV = new Vector3(topRightCorner.x, 0, bottomLeftCorner.y);
@@ -226,8 +236,10 @@ public class DungeonCreator : MonoBehaviour
         // Instantiate the floor prefab
         GameObject floorObject = Instantiate(floorPrefab, floorPosition, Quaternion.identity);
             floorObject.transform.localScale = new Vector3(topRightCorner.x - bottomLeftCorner.x, 0.1f, topRightCorner.y - bottomLeftCorner.y);
-            floorObject.transform.parent = transform; 
-        }
+            floorObject.transform.parent = transform;
+            Vector3 floorSize = floorObject.GetComponent<Renderer>().bounds.size;
+            decorateDungeon(floorPosition, floorSize);
+}
 
          void CreateRoof(Vector2 bottomLeftCorner, Vector2 topRightCorner)
         {
@@ -240,8 +252,7 @@ public class DungeonCreator : MonoBehaviour
         roofObject.transform.parent = transform; 
         }
 
-
-    }
+}
 
 
 

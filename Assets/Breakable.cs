@@ -6,7 +6,7 @@ public class Breakable : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger enter");
+        Debug.Log("Trigger 1");
 
         if (other.gameObject.CompareTag("Decor") || other.gameObject.CompareTag("Wall"))
         {
@@ -15,7 +15,7 @@ public class Breakable : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("Trigger enter");
+        Debug.Log("Trigger 2");
         if (other.gameObject.CompareTag("Decor") || other.gameObject.CompareTag("Wall"))
         {
 
@@ -25,7 +25,7 @@ public class Breakable : MonoBehaviour
     void OnCollisionEnter(Collision collision)
 
     {
-        Debug.Log("Trigger enter");
+        Debug.Log("Trigger 3");
         if (collision.gameObject.CompareTag("Decor") || collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
@@ -33,7 +33,7 @@ public class Breakable : MonoBehaviour
     }
     void OnCollisionStay(Collision collision)
     {
-        Debug.Log("Trigger enter");
+        Debug.Log("Trigger 4");
         if (collision.gameObject.CompareTag("Decor") || collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);

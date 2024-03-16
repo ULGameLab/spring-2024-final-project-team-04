@@ -49,13 +49,13 @@ public class DungeonCreator : MonoBehaviour
                 float roomWidth = Mathf.Abs(room.TopRightAreaCorner.x - room.BottomLeftAreaCorner.x);
 
                 // Get size of the decoration 
-                int whatDEcor = UnityEngine.Random.Range(0, 10);
+                int whatDEcor = UnityEngine.Random.Range(0, 8);
                 Vector3 decorationSize = decorations[whatDEcor].GetComponent<Renderer>().bounds.size;
 
                 // Calculate random position within the room
                 float xPosition = UnityEngine.Random.Range(room.BottomLeftAreaCorner.x, room.TopRightAreaCorner.x);
                 float zPosition = UnityEngine.Random.Range(room.BottomLeftAreaCorner.x, room.TopRightAreaCorner.x);
-                Vector3 randomPosition = new Vector3(xPosition, -0.886f, zPosition);
+                Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
 
                 // Offset position by half the decoration size so it's centered
                 randomPosition += new Vector3(-decorationSize.x / 2, 0, -decorationSize.z / 2);

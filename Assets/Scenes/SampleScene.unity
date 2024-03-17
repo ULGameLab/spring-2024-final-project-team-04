@@ -574,7 +574,7 @@ MonoBehaviour:
   roomWidthMin: 15
   roomLengthMin: 15
   maxIterations: 30
-  corridorWidth: 3
+  corridorWidth: 2
   roomBottomCornerModifier: 0.159
   roomTopCornerMidifier: 0.884
   roomOffset: 2
@@ -592,7 +592,6 @@ MonoBehaviour:
   - {fileID: 100000, guid: cffd77da92125de43beff28f0051721e, type: 3}
   - {fileID: 100000, guid: 6423b6a6b80004e498392a10b68fb590, type: 3}
   - {fileID: 100000, guid: 06f4b67a4f109d341a0e02b8bb65c731, type: 3}
-  wallDecorations:
   - {fileID: 100000, guid: d47636f63c2d5494491b20bf35c86a9f, type: 3}
 --- !u!43 &175350566
 Mesh:

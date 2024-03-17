@@ -20,7 +20,6 @@ public class DungeonCreator : MonoBehaviour
     public GameObject floorPrefab;
     public GameObject roofPrefab;
     public GameObject[] decorations;
-    public GameObject[] wallDecorations;
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -30,25 +29,7 @@ public class DungeonCreator : MonoBehaviour
     {
         CreateDungeon();
     }
-
-    void decorateWalls(Vector3 floorPosition, Vector3 floorSize)
-    {
-        // Calculate the range around the walls
-        float minX = floorPosition.x - floorSize.x / 2f;
-        float maxX = floorPosition.x + floorSize.x / 2f;
-        float minZ = floorPosition.z - floorSize.z / 2f;
-        float maxZ = floorPosition.z + floorSize.z / 2f;
-
-        // Calculate a random position biased towards the edges of the room
-        Vector3 randomPosition = new Vector3(UnityEngine.Random.Range(minX, maxX),-1f,UnityEngine.Random.Range(minZ, maxZ));
-        // pick an item from list //changed
-        int whatDEcor = UnityEngine.Random.Range(0, 2);
-        if (whatDEcor == 1)
-        {
-            Instantiate(wallDecorations[0], randomPosition, Quaternion.identity);
-        }
-    }
-            
+    
     // after a floor/ground for the room is made; decorated the room
     void decorateDungeon(Vector3 floorPosition, Vector3 floorSize)
     {
@@ -65,7 +46,7 @@ public class DungeonCreator : MonoBehaviour
             Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
 
             // Pick a random decoration
-            int whatDecor = UnityEngine.Random.Range(0, 9);
+            int whatDecor = UnityEngine.Random.Range(0, 10);
 
             // Instantiate the decoration at the calculated position
             Instantiate(decorations[whatDecor], randomPosition, Quaternion.identity);
@@ -245,7 +226,6 @@ public class DungeonCreator : MonoBehaviour
             floorObject.transform.parent = transform;
             Vector3 floorSize = floorObject.GetComponent<Renderer>().bounds.size;
             decorateDungeon(floorPosition, floorSize);
-            decorateWalls(floorPosition, floorSize);
 }
 
          void CreateRoof(Vector2 bottomLeftCorner, Vector2 topRightCorner)

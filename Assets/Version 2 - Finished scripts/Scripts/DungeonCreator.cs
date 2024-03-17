@@ -31,20 +31,25 @@ public class DungeonCreator : MonoBehaviour
         CreateDungeon();
     }
 
-    void decorateWalls(Vector3 wallPosition)
+    void decorateWalls(Vector3 floorPosition, Vector3 floorSize)
     {
+        // Calculate the range around the walls
+        float minX = floorPosition.x - floorSize.x / 2f;
+        float maxX = floorPosition.x + floorSize.x / 2f;
+        float minZ = floorPosition.z - floorSize.z / 2f;
+        float maxZ = floorPosition.z + floorSize.z / 2f;
 
+        // Calculate a random position biased towards the edges of the room
+        Vector3 randomPosition = new Vector3(UnityEngine.Random.Range(minX, maxX),-1f,UnityEngine.Random.Range(minZ, maxZ));
         // pick an item from list //changed
-        int whatDEcor = UnityEngine.Random.Range(0, 7);
+        int whatDEcor = UnityEngine.Random.Range(0, 2);
         if (whatDEcor == 1)
         {
-            // Calculate position on the wall
-            Vector3 randomPosition = new Vector3(wallPosition.x, -1f, wallPosition.z);
             Instantiate(wallDecorations[0], randomPosition, Quaternion.identity);
         }
     }
             
-    // after a floor/ground for the room is made decorated the room
+    // after a floor/ground for the room is made; decorated the room
     void decorateDungeon(Vector3 floorPosition, Vector3 floorSize)
     {
         //change to be based off room size??????
@@ -60,7 +65,7 @@ public class DungeonCreator : MonoBehaviour
             Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
 
             // Pick a random decoration
-            int whatDecor = UnityEngine.Random.Range(0, 8);
+            int whatDecor = UnityEngine.Random.Range(0, 9);
 
             // Instantiate the decoration at the calculated position
             Instantiate(decorations[whatDecor], randomPosition, Quaternion.identity);
@@ -120,8 +125,9 @@ public class DungeonCreator : MonoBehaviour
         GameObject wallObject = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
 
         // Set the position of the wall
+
         wallObject.transform.position = wallPosition;
-        decorateWalls(wallPosition);
+        wallObject.transform.position = new Vector3(wallPosition.x, wallPosition.y, wallPosition.z + 0.5f);
 
     }
 
@@ -132,9 +138,9 @@ public class DungeonCreator : MonoBehaviour
 
         // Set the position of the wall
         wallObject.transform.position = wallPosition;
-        
+        wallObject.transform.position = new Vector3(wallPosition.x + 0.5f, wallPosition.y, wallPosition.z);
+
         wallObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        decorateWalls(wallPosition);
     }
 
 
@@ -239,6 +245,7 @@ public class DungeonCreator : MonoBehaviour
             floorObject.transform.parent = transform;
             Vector3 floorSize = floorObject.GetComponent<Renderer>().bounds.size;
             decorateDungeon(floorPosition, floorSize);
+            decorateWalls(floorPosition, floorSize);
 }
 
          void CreateRoof(Vector2 bottomLeftCorner, Vector2 topRightCorner)

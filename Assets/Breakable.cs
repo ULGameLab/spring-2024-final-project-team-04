@@ -31,13 +31,6 @@ public class Breakable : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void OnCollisionStay(Collision collision)
-    {
-        Debug.Log("Trigger 4");
-        if (collision.gameObject.CompareTag("Decor") || collision.gameObject.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
-        }
-    }
+    
 }
 

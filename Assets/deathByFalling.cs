@@ -6,7 +6,7 @@ public class deathByFalling : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("YOu fell");
+        Debug.Log("1 fell");
 
        
         
@@ -16,7 +16,7 @@ public class deathByFalling : MonoBehaviour
     void OnCollisionEnter(Collision collision)
 
     {
-        Debug.Log("YOu fell");
+        Debug.Log("1.1 fell");
 
 
 

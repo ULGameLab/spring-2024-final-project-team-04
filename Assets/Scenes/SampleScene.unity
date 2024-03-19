@@ -593,6 +593,8 @@ MonoBehaviour:
   - {fileID: 100000, guid: 6423b6a6b80004e498392a10b68fb590, type: 3}
   - {fileID: 100000, guid: 06f4b67a4f109d341a0e02b8bb65c731, type: 3}
   - {fileID: 100000, guid: d47636f63c2d5494491b20bf35c86a9f, type: 3}
+  bugs:
+  - {fileID: 1253086935255656, guid: 60e8218091f83244c9bf9c8c2569a009, type: 3}
 --- !u!43 &175350566
 Mesh:
   m_ObjectHideFlags: 0

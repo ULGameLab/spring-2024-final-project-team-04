@@ -20,6 +20,8 @@ public class DungeonCreator : MonoBehaviour
     public GameObject floorPrefab;
     public GameObject roofPrefab;
     public GameObject[] decorations;
+    //bugs
+    public GameObject[] bugs;
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -52,6 +54,28 @@ public class DungeonCreator : MonoBehaviour
             Instantiate(decorations[whatDecor], randomPosition, Quaternion.identity);
         
             }
+        }
+
+    //spawn enemies 
+    void spawnBugs(Vector3 floorPosition, Vector3 floorSize)
+    {
+        int numberOfBugs = UnityEngine.Random.Range(5,10);
+        for (int i = 0; i < numberOfBugs; i++)
+        {
+            // random position
+            // The floors (location - half its size) to the floors (location + half its size) in the X/Z axixes
+            float xPosition = UnityEngine.Random.Range(floorPosition.x - floorSize.x / 2f, floorPosition.x + floorSize.x / 2f);
+            float zPosition = UnityEngine.Random.Range(floorPosition.z - floorSize.z / 2f, floorPosition.z + floorSize.z / 2f);
+            Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
+
+            // Pick a random decoration
+            int whichBug = 0;
+
+            //create bug
+            Instantiate(bugs[whichBug], randomPosition, Quaternion.identity);
+        }
+            //dont let them spawn inside stuff
+           
         }
     
     public void CreateDungeon()
@@ -226,6 +250,15 @@ public class DungeonCreator : MonoBehaviour
             floorObject.transform.parent = transform;
             Vector3 floorSize = floorObject.GetComponent<Renderer>().bounds.size;
             decorateDungeon(floorPosition, floorSize);
+
+        //if the room is a hallway don't spawn bugs
+        int Hallway = 15;
+        float roomsize = floorObject.GetComponent<Renderer>().bounds.size.x + floorObject.GetComponent<Renderer>().bounds.size.z;
+        if (roomsize > Hallway)
+        {
+            Debug.Log(floorSize);
+            spawnBugs(floorPosition, floorSize);
+        }
 }
 
          void CreateRoof(Vector2 bottomLeftCorner, Vector2 topRightCorner)

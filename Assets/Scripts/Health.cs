@@ -126,6 +126,11 @@ public class Health : MonoBehaviour
                 flashNum.text = flashbangCount.ToString();
                 break;
 
+            case "EnemyAttack":
+                health -= 10;
+                Debug.Log("Enemy attack");
+                break;
+
             default:
                 break;
         }

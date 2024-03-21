@@ -15,6 +15,7 @@ TagManager:
   - Flash
   - Mesh
   - Decor
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX

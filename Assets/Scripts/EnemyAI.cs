@@ -1,0 +1,186 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+// FSM States for the enemy
+public enum EnemyState { ATTACK, CHASE, MOVING, DEFAULT, DEAD };
+
+[RequireComponent(typeof(NavMeshAgent))]
+//[RequireComponent(typeof(AudioSource))]
+public class EnemyAI : MonoBehaviour
+{
+    GameObject player;
+    NavMeshAgent agent;
+    public float chaseDistance = 10.0f;
+    public float maxHp = 50;
+    public float health = 50;
+    [SerializeField] EnemyHealthBar healthBar;
+    //public GameObject[] foodPrefabs; // Array of your food prefabs
+
+
+    protected EnemyState state = EnemyState.DEFAULT;
+    protected Vector3 destination = new Vector3(0, 0, 0);
+    Animator animator;
+    private float originSpeed;
+    private float chaseSpeed;
+    AudioSource myaudio;
+
+    //Explosion Effect
+    public ParticleSystem deathEffect;
+    //bool effectStarted = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+        agent = this.GetComponent<NavMeshAgent>();
+        healthBar = GetComponentInChildren<EnemyHealthBar>();
+        healthBar.UpdateHealthBar(health, maxHp);
+        animator = GetComponent<Animator>();
+        originSpeed = agent.speed;
+        chaseSpeed = agent.speed * 1.5f;
+        //myaudio = GetComponent<AudioSource>();
+        //deathEffect = transform.GetComponent<ParticleSystem>();
+    }
+
+    private Vector3 RandomPosition()
+    {
+        return new Vector3(Random.Range(-5.0f, 5.0f), 0, Random.Range(-5.0f, 5.0f));
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (state)
+        {
+            case EnemyState.DEFAULT:
+                animator.SetBool("isWalking", false);
+                if (Vector3.Distance(transform.position, player.transform.position) < chaseDistance)
+                {
+                    state = EnemyState.CHASE;
+                    animator.SetBool("inCombat", true);
+                }
+                else
+                {
+                    state = EnemyState.MOVING;
+                    animator.SetBool("inCombat", false);
+                    destination = transform.position + RandomPosition();
+                    agent.SetDestination(destination);
+                }
+                break;
+            case EnemyState.MOVING:
+                animator.SetBool("isWalking", true);
+                Debug.Log("Dest = " + destination);
+                if (Vector3.Distance(transform.position, destination) < 0.05f)
+                {
+                    state = EnemyState.DEFAULT;
+                }
+                if (Vector3.Distance(transform.position, player.transform.position) < chaseDistance)
+                {
+                    state = EnemyState.CHASE;
+                    animator.SetBool("inCombat", true);
+                }
+                break;
+            case EnemyState.CHASE:
+                if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance)
+                {
+                    state = EnemyState.DEFAULT;
+                    animator.SetBool("inCombat", false);
+                    break;
+                }
+                agent.SetDestination(player.transform.position);
+                animator.SetBool("isWalking", true);
+                if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance / 2)
+                {
+                    animator.SetBool("fastChase", true);
+                    agent.speed = chaseSpeed;
+                }
+                else
+                {
+                    animator.SetBool("fastChase", false);
+                    agent.speed = originSpeed;
+                }
+                if (Vector3.Distance(transform.position, player.transform.position) <= agent.stoppingDistance + 0.1f)
+                {
+                    state = EnemyState.ATTACK;
+                }
+                break;
+            case EnemyState.ATTACK:
+                animator.SetBool("isAttacking", true);
+                animator.SetBool("isWalking", false);
+                if (Vector3.Distance(transform.position, player.transform.position) > agent.stoppingDistance)
+                {
+                    state = EnemyState.MOVING;
+                    animator.SetBool("isAttacking", false);
+                }
+                break;
+            case EnemyState.DEAD:
+                agent.isStopped = true;
+                break;
+            default:
+                break;
+        }
+    }
+
+    // Call this method to spawn a random food item at a given position
+    //public void SpawnRandomFood(Vector3 position)
+    //{
+    //    int randomIndex = Random.Range(0, foodPrefabs.Length);
+    //    GameObject randomFoodPrefab = foodPrefabs[randomIndex];
+    //    // Adjust the spawn position to be slightly above the ground
+    //    Vector3 spawnPosition = new Vector3(position.x, position.y + 1.0f, position.z);
+    //    Instantiate(randomFoodPrefab, spawnPosition, Quaternion.identity);
+    //}
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Attack"))
+        {
+            health -= 10;
+            healthBar.UpdateHealthBar(health, maxHp);
+            animator.SetBool("takeDamage", true);
+            StartCoroutine(TurnDamageOff(1));
+            // Disable all Renderers and Colliders
+            Destroy(col.gameObject);
+            if(health <= 0)
+            {
+                Die();
+            }
+            //Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
+            //foreach (Renderer c in allRenderers) c.enabled = false;
+            //Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
+            //foreach (Collider c in allColliders) c.enabled = false;
+            //gameObject.GetComponent<ParticleSystemRenderer>().enabled = true;
+            //StartCoroutine(PlayAndDestroy(myaudio.clip.length));
+        }
+    }
+
+    void Die()
+    {
+        state = EnemyState.DEAD;
+        animator.SetBool("dead", true);
+        Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
+        foreach (Collider c in allColliders) c.enabled = false;
+        StartCoroutine(PlayAndDestroy(4.67f));
+    }
+
+    private IEnumerator TurnDamageOff(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("takeDamage", false);
+    }
+
+    private IEnumerator PlayAndDestroy(float waitTime)
+    {
+        //myaudio.Play();
+        //SpawnRandomFood(transform.position);
+        yield return new WaitForSeconds(waitTime);
+        deathEffect.Play();
+        yield return new WaitForSeconds(0.2f);
+        Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer c in allRenderers) c.enabled = false;
+        //StopBloodSplatter();
+        Destroy(gameObject);
+    }
+}

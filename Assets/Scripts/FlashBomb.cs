@@ -11,6 +11,8 @@ public class FlashBomb : MonoBehaviour
     AudioSource myaudio;
 
     [SerializeField] Health hScript;
+    [SerializeField] ItemSwitch item;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class FlashBomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Alpha3)) && (hScript.flashbangCount != 0))
+        if ((Input.GetKeyDown(KeyCode.Alpha3)) && (hScript.flashbangCount >= 1) && item.flash_inv.activeSelf)
         {
 
             GameObject currentBullet = Instantiate(Bullet, this.transform.position, this.transform.rotation) as GameObject;
@@ -32,6 +34,9 @@ public class FlashBomb : MonoBehaviour
             myaudio.Play();
 
             Destroy(currentBullet, destroyTime);
+
+            hScript.flashbangCount--;
+            hScript.flashNum.text = hScript.flashbangCount.ToString();
         }
     }
 }

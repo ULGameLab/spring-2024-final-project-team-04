@@ -5,15 +5,15 @@ using UnityEngine;
 public class Gloves : MonoBehaviour
 {
     public GameObject hitbox;
-    public GameObject particles;
-   // ParticleSystem particle;
+   // public GameObject particles;
+    ParticleSystem particle;
 
     // Start is called before the first frame update
     void Start()
     {
-        // particle = GetComponent<ParticleSystem>();
+         particle = GetComponent<ParticleSystem>();
         hitbox.SetActive(false);
-        particles.SetActive(false);
+       // particles.SetActive(true);
 
     }
 
@@ -22,7 +22,7 @@ public class Gloves : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
         {
-            GloveBlast();
+            StartCoroutine(GloveBlast());
         }
         
     }
@@ -30,9 +30,10 @@ public class Gloves : MonoBehaviour
     private IEnumerator GloveBlast()
     {
         hitbox.SetActive(true);
-        particles.SetActive(true);
+        particle.Play();
+       // particles.SetActive(true);
         yield return new WaitForSeconds(2.5f);
         hitbox.SetActive(false);
-        particles.SetActive(false);
+        //particles.SetActive(false);
     }
 }

@@ -6,13 +6,17 @@ public class WeaponSwap : MonoBehaviour
 {
     public GameObject weapon1;
     public GameObject weapon2;
+    public GameObject weapon3;
+
     private bool w2unlocked = true;
+    private bool w3unlocked = true;
 
     // Start is called before the first frame update
     void Start()
     {
         weapon1.SetActive(true);
         weapon2.SetActive(false);
+        weapon3.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,24 +29,22 @@ public class WeaponSwap : MonoBehaviour
                 weapon1.SetActive(false);
                 weapon2.SetActive(true);
             }
-            else if (weapon2.activeSelf)
+            else if (weapon2.activeSelf && w3unlocked)
             {
-                weapon1.SetActive(true);
                 weapon2.SetActive(false);
+                weapon3.SetActive(true);
+            }
+            else if(weapon2.activeSelf && !w3unlocked)
+            {
+                weapon2.SetActive(false);
+                weapon1.SetActive(true);
+            }
+            else if (weapon3.activeSelf)
+            {
+                weapon3.SetActive(false);
+                weapon1.SetActive(true);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Q) && w2unlocked)
-        {
-            if (weapon1.activeSelf)
-            {
-                weapon1.SetActive(false);
-                weapon2.SetActive(true);
-            }
-            else if (weapon2.activeSelf)
-            {
-                weapon1.SetActive(true);
-                weapon2.SetActive(false);
-            }
-        }
+        
     }
 }

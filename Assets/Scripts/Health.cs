@@ -122,7 +122,7 @@ public class Health : MonoBehaviour
                 break;
 
             case "Flash":
-                flashbangCount++;
+                ++flashbangCount;
                 flashNum.text = flashbangCount.ToString();
                 break;
 

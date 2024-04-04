@@ -59,7 +59,7 @@ public class DungeonCreator : MonoBehaviour
     //spawn enemies 
     void spawnBugs(Vector3 floorPosition, Vector3 floorSize)
     {
-        int numberOfBugs = UnityEngine.Random.Range(5,10);
+        int numberOfBugs = UnityEngine.Random.Range(3,6);
         for (int i = 0; i < numberOfBugs; i++)
         {
             // random position
@@ -69,7 +69,7 @@ public class DungeonCreator : MonoBehaviour
             Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
 
             // Pick a random decoration
-            int whichBug = 0;
+            int whichBug = UnityEngine.Random.Range(0, 2);
 
             //create bug
             Instantiate(bugs[whichBug], randomPosition, Quaternion.identity);
@@ -256,8 +256,7 @@ public class DungeonCreator : MonoBehaviour
         float roomsize = floorObject.GetComponent<Renderer>().bounds.size.x + floorObject.GetComponent<Renderer>().bounds.size.z;
         if (roomsize > Hallway)
         {
-            Debug.Log(floorSize);
-            spawnBugs(floorPosition, floorSize);
+            //spawnBugs(floorPosition, floorSize);
         }
 }
 

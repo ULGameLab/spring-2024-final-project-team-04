@@ -22,6 +22,7 @@ public class DungeonCreator : MonoBehaviour
     public GameObject[] decorations;
     //bugs
     public GameObject[] bugs;
+    public static int bugCount = 0;
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -52,14 +53,13 @@ public class DungeonCreator : MonoBehaviour
 
             // Instantiate the decoration at the calculated position
             Instantiate(decorations[whatDecor], randomPosition, Quaternion.identity);
-        
-            }
+        }
         }
 
     //spawn enemies 
     void spawnBugs(Vector3 floorPosition, Vector3 floorSize)
     {
-        int numberOfBugs = UnityEngine.Random.Range(3,6);
+        int numberOfBugs = UnityEngine.Random.Range(1,2);
         for (int i = 0; i < numberOfBugs; i++)
         {
             // random position
@@ -73,8 +73,9 @@ public class DungeonCreator : MonoBehaviour
 
             //create bug
             Instantiate(bugs[whichBug], randomPosition, Quaternion.identity);
+            bugCount++;
         }
-            //dont let them spawn inside stuff
+            
            
         }
     
@@ -256,14 +257,14 @@ public class DungeonCreator : MonoBehaviour
         float roomsize = floorObject.GetComponent<Renderer>().bounds.size.x + floorObject.GetComponent<Renderer>().bounds.size.z;
         if (roomsize > Hallway)
         {
-            //spawnBugs(floorPosition, floorSize);
+            spawnBugs(floorPosition, floorSize);
         }
 }
 
          void CreateRoof(Vector2 bottomLeftCorner, Vector2 topRightCorner)
         {
             // Calculate the position of the roof
-            Vector3 roofPosition = new Vector3((bottomLeftCorner.x + topRightCorner.x) / 2f, 0.9f, (bottomLeftCorner.y + topRightCorner.y) / 2f);
+            Vector3 roofPosition = new Vector3((bottomLeftCorner.x + topRightCorner.x) / 2f, 2f, (bottomLeftCorner.y + topRightCorner.y) / 2f);
 
             // Instantiate the roof prefab
             GameObject roofObject = Instantiate(roofPrefab, roofPosition, Quaternion.identity);

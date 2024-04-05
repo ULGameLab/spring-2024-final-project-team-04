@@ -11355,7 +11355,8 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8499879625487688884, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
@@ -12768,7 +12769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3105021197017474708, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.82
+      value: -31.7
       objectReference: {fileID: 0}
     - target: {fileID: 3105021197017474708, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12802,6 +12803,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sand Spider
       objectReference: {fileID: 0}
+    - target: {fileID: 9008928147193068895, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 843957044}
     - target: {fileID: 9079881255393439561, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

@@ -18,6 +18,7 @@ TagManager:
   - EnemyAttack
   - Attack
   - Support
+  - Spider
   layers:
   - Default
   - TransparentFX

@@ -10,18 +10,21 @@ public class Health : MonoBehaviour
     public GameObject HealthBar;
     public GameObject ShieldBuff;
     public GameObject FlashBomb;
+    public GameObject GasBomb;
     private static Image HealthBarImage;
     private float health = 75.0f;
     private float healVal = 10.0f;
     private int healthPotCount = 0;
     private int shieldPotCount = 0;
     public int flashbangCount = 0;
+    public int gasPotCount = 0;
 
     AudioSource potionDrink;
 
     public TextMeshProUGUI healthNum;
     public TextMeshProUGUI shieldNum;
     public TextMeshProUGUI flashNum;
+    public TextMeshProUGUI gasNum;
 
     [SerializeField] FirstPersonController fpc;
     [SerializeField] ItemSwitch item;
@@ -34,6 +37,7 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        Cursor.visible = false;
 
         potionDrink = GetComponent<AudioSource>();
 
@@ -47,7 +51,7 @@ public class Health : MonoBehaviour
         healthNum.text = healthPotCount.ToString();
         shieldNum.text = shieldPotCount.ToString();
         flashNum.text = flashbangCount.ToString();
-        
+        gasNum.text = flashbangCount.ToString();
     }
 
     public static void SetHealthBarValue(float value)
@@ -83,28 +87,22 @@ public class Health : MonoBehaviour
         SetHealthBarValue(health / 100);
 
         
-        if((Input.GetKeyDown(KeyCode.Alpha1)) && (healthPotCount != 0) && item.health_inv.activeSelf)
+        if((Input.GetMouseButtonDown(1)) && (healthPotCount != 0) && item.health_inv.activeSelf)
         {
             potionDrink.Play();
             health += healVal;
-            healthPotCount--;
+            healthPotCount -= 1;
             healthNum.text = healthPotCount.ToString();
             Debug.Log("HealthPot Used");
         }
-        else if ((Input.GetKeyDown(KeyCode.Alpha2)) && (shieldPotCount != 0) && item.shields_inv.activeSelf)
+        else if ((Input.GetMouseButtonDown(1)) && (shieldPotCount != 0) && item.shields_inv.activeSelf)
         {
             StartCoroutine(ShieldPotion());
-            shieldPotCount--;
+            shieldPotCount -= 1;
             shieldNum.text = shieldPotCount.ToString();
             Debug.Log("Shield Potions: " + shieldPotCount.ToString());
         }
-       /* else if((Input.GetKeyDown(KeyCode.Alpha3)) && (flashbangCount != 0))
-        {
-            //flashbangCount--;
-            //flashNum.text = flashbangCount.ToString();
-            //flashbangCount--;
-        }
-       */
+
     }
 
     public void OnTriggerEnter(Collider other)
@@ -114,12 +112,12 @@ public class Health : MonoBehaviour
         {
 
             case "Heal":
-                ++healthPotCount;
+                healthPotCount += 1;
                 healthNum.text = healthPotCount.ToString();
                 break;
 
             case "Shield":
-                ++shieldPotCount;
+                shieldPotCount += 1;
                 shieldNum.text = shieldPotCount.ToString();
                 Debug.Log("Shield Potions Collected: " + shieldPotCount.ToString());
                 break;
@@ -127,6 +125,12 @@ public class Health : MonoBehaviour
             case "Flash":
                 ++flashbangCount;
                 flashNum.text = flashbangCount.ToString();
+                break;
+
+            case "Speed":
+                ++gasPotCount;
+                gasNum.text = gasPotCount.ToString();
+                Debug.Log("Gas Potions Collected: " + gasPotCount.ToString());
                 break;
 
             case "EnemyAttack":
@@ -137,6 +141,16 @@ public class Health : MonoBehaviour
             default:
                 break;
         }
+
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("GasArea"))
+        {
+            health -= .05f;
+        }
+
     }
 
     private IEnumerator ShieldPotion()

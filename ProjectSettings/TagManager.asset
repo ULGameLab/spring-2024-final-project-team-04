@@ -18,6 +18,7 @@ TagManager:
   - EnemyAttack
   - Attack
   - Support
+  - GasArea
   layers:
   - Default
   - TransparentFX

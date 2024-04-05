@@ -26,7 +26,7 @@ public class Breakable : MonoBehaviour
 
     {
         Debug.Log("Trigger 3" + gameObject);
-        if (collision.gameObject.CompareTag("Decor") || collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Decor") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Attack"))
         {
             Destroy(gameObject);
         }

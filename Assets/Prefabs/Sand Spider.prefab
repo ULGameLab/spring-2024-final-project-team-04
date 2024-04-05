@@ -11844,7 +11844,7 @@ GameObject:
   - component: {fileID: 423108253025884823}
   m_Layer: 0
   m_Name: Sand Spider
-  m_TagString: Untagged
+  m_TagString: Spider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

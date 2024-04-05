@@ -340,6 +340,7 @@ MonoBehaviour:
   BulletForce: 500
   destroyTime: 5
   hScript: {fileID: 881111761}
+  item: {fileID: 0}
 --- !u!1 &197485214
 GameObject:
   m_ObjectHideFlags: 0
@@ -11354,7 +11355,8 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8499879625487688884, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
@@ -11437,6 +11439,7 @@ MonoBehaviour:
   shieldNum: {fileID: 197485217}
   flashNum: {fileID: 299839533}
   fpc: {fileID: 881111758}
+  item: {fileID: 0}
 --- !u!114 &881111762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11451,6 +11454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon1: {fileID: 725501833}
   weapon2: {fileID: 1730503719}
+  weapon3: {fileID: 0}
 --- !u!82 &881111763
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12765,7 +12769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3105021197017474708, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.82
+      value: -31.7
       objectReference: {fileID: 0}
     - target: {fileID: 3105021197017474708, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12799,6 +12803,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sand Spider
       objectReference: {fileID: 0}
+    - target: {fileID: 9008928147193068895, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 843957044}
     - target: {fileID: 9079881255393439561, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -12822,11 +12830,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2020864470088987905, guid: 380ece5588baf4e108641a148d67d425, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.81
       objectReference: {fileID: 0}
     - target: {fileID: 2020864470088987905, guid: 380ece5588baf4e108641a148d67d425, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6073260575859548233, guid: 380ece5588baf4e108641a148d67d425, type: 3}
       propertyPath: cam
@@ -12835,6 +12843,10 @@ PrefabInstance:
     - target: {fileID: 7876894970948490883, guid: 380ece5588baf4e108641a148d67d425, type: 3}
       propertyPath: m_Name
       value: wizard_weapon_macanim DEMO
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876894970948490883, guid: 380ece5588baf4e108641a148d67d425, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8428096246032064788, guid: 380ece5588baf4e108641a148d67d425, type: 3}
       propertyPath: m_LocalPosition.x

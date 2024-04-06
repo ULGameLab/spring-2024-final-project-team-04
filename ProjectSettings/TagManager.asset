@@ -22,6 +22,7 @@ TagManager:
   - spawnPoint
   - sp2
   - sp3
+  - key
   layers:
   - Default
   - TransparentFX

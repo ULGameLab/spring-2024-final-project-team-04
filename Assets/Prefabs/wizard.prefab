@@ -41770,7 +41770,6 @@ GameObject:
   - component: {fileID: 1618481399286939738}
   - component: {fileID: 605601918086369743}
   - component: {fileID: 4901923951120005270}
-  - component: {fileID: -7771054552591702089}
   m_Layer: 0
   m_Name: wizard
   m_TagString: Untagged
@@ -41887,19 +41886,6 @@ CapsuleCollider:
   m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 4.21, z: 0}
---- !u!114 &-7771054552591702089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7876894970948490883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acfbd50231715414d87c9160ce813f65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSP: []
 --- !u!1 &8057398812981986842
 GameObject:
   m_ObjectHideFlags: 0

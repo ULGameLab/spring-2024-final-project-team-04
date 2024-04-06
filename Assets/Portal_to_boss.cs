@@ -28,9 +28,9 @@ public class Portal_to_boss : MonoBehaviour
     void OnCollisionEnter(Collision collision)
 
     {
-
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && Health.keyCount > 0)
         {
+            Health.keyCount = Health.keyCount--;
             collision.transform.position = playerSP[0].transform.position;
         }
     }

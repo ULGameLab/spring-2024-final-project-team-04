@@ -16,6 +16,8 @@ public class Health : MonoBehaviour
     private int healthPotCount = 0;
     private int shieldPotCount = 0;
     public int flashbangCount = 0;
+    //key stuff
+    public static int keyCount = 0;
 
     AudioSource potionDrink;
 
@@ -134,6 +136,10 @@ public class Health : MonoBehaviour
                 Debug.Log("Enemy attack");
                 break;
 
+            case "key":
+                keyCount++;
+                Debug.Log("key");
+                break;
             default:
                 break;
         }

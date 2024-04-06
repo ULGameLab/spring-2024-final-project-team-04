@@ -11841,7 +11841,6 @@ GameObject:
   - component: {fileID: 7691082489575182659}
   - component: {fileID: 3223767203851057064}
   - component: {fileID: 1952795785647186498}
-  - component: {fileID: 423108253025884823}
   m_Layer: 0
   m_Name: Sand Spider
   m_TagString: Spider
@@ -11958,19 +11957,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.5, y: 1.6, z: 2.6}
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &423108253025884823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5673786357896791899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acfbd50231715414d87c9160ce813f65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSP: []
 --- !u!1 &5858353433909713668
 GameObject:
   m_ObjectHideFlags: 0

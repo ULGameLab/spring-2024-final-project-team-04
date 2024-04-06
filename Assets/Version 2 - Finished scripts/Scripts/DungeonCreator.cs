@@ -16,7 +16,7 @@ public class DungeonCreator : MonoBehaviour
     [Range(0, 2)]
     public int roomOffset;
     //types of walls
-    public GameObject wallVertical, wallHorizontal;
+    public GameObject wallVertical, wallHorizontal, webDoor;
     public GameObject floorPrefab;
     public GameObject roofPrefab;
     public GameObject[] decorations;
@@ -68,7 +68,7 @@ public class DungeonCreator : MonoBehaviour
             float zPosition = UnityEngine.Random.Range(floorPosition.z - floorSize.z / 2f, floorPosition.z + floorSize.z / 2f);
             Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
 
-            // Pick a random decoration
+            // Pick a random bug
             int whichBug = UnityEngine.Random.Range(0, 2);
 
             //create bug
@@ -101,6 +101,10 @@ public class DungeonCreator : MonoBehaviour
             CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
         }
         CreateWalls(wallParent);
+        for (int i = 0; i < 3; i++)
+        {
+            AddDoors(webDoor);
+        }
         foreach (var room in listOfRooms)
         {
             
@@ -109,8 +113,18 @@ public class DungeonCreator : MonoBehaviour
         }
         
     }
+void AddDoors(GameObject webDoor)
+{
+        int whichwall = UnityEngine.Random.Range(0, possibleWallHorizontalPosition.Count);
+        Vector3Int doorlocation = possibleWallHorizontalPosition[whichwall];
+        possibleWallVerticalPosition.RemoveAt(whichwall);
 
-         void CreateWalls(GameObject wallParent)
+        // Instantiate the door object
+        GameObject DoorObject = Instantiate(webDoor, doorlocation + new Vector3(0f, -0.8f, 0.0f), Quaternion.Euler(0f, 90f, 0f));
+    
+
+}
+void CreateWalls(GameObject wallParent)
         {
            
         foreach (var wallPosition in possibleWallHorizontalPosition)
@@ -139,14 +153,17 @@ public class DungeonCreator : MonoBehaviour
 
     void CreateWallHorizontal(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
     {
-        // Instantiate the wall prefab
-        GameObject wallObject = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
+       
+            // Instantiate the wall prefab
+            GameObject wallObject = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
 
-        // Set the position of the wall
-        wallObject.transform.position = wallPosition;
-        wallObject.transform.position = new Vector3(wallPosition.x + 0.5f, wallPosition.y, wallPosition.z);
+            // Set the position of the wall
+            wallObject.transform.position = wallPosition;
+            wallObject.transform.position = new Vector3(wallPosition.x + 0.5f, wallPosition.y, wallPosition.z);
 
-        wallObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            wallObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        
+        
     }
 
 

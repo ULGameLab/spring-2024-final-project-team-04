@@ -59,7 +59,7 @@ public class DungeonCreator : MonoBehaviour
     //spawn enemies 
     void spawnBugs(Vector3 floorPosition, Vector3 floorSize)
     {
-        int numberOfBugs = UnityEngine.Random.Range(1,2);
+        int numberOfBugs = UnityEngine.Random.Range(1,1);
         for (int i = 0; i < numberOfBugs; i++)
         {
             // random position

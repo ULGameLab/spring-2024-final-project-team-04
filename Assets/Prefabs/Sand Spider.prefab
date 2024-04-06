@@ -11933,8 +11933,10 @@ MonoBehaviour:
   chaseDistance: 20
   maxHp: 50
   health: 50
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 9008928147193068895}
   deathEffect: {fileID: 2944883433612543864}
+  MaxCount: 0
+  key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!65 &1952795785647186498
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11968,8 +11970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfbd50231715414d87c9160ce813f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxCount: 0
-  key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!1 &5858353433909713668
 GameObject:
   m_ObjectHideFlags: 0
@@ -18561,3 +18561,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2695171524866581589, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
   m_PrefabInstance: {fileID: 1924583524663415996}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9008928147193068895 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7472416193380624867, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
+  m_PrefabInstance: {fileID: 1924583524663415996}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e79bdb04153c4682959705c0646c293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

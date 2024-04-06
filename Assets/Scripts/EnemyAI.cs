@@ -30,9 +30,17 @@ public class EnemyAI : MonoBehaviour
     public ParticleSystem deathEffect;
     //bool effectStarted = false;
 
+    //key stuff
+    public int MaxCount;
+    public GameObject key;
+    public static int maxKeys = 0;
     // Start is called before the first frame update
     void Start()
     {
+        //for keys
+        MaxCount = DungeonCreator.bugCount;
+        //Debug.Log(MaxCount);
+        //other
         player = GameObject.FindWithTag("Player");
         agent = this.GetComponent<NavMeshAgent>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
@@ -178,6 +186,7 @@ public class EnemyAI : MonoBehaviour
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
         foreach (Collider c in allColliders) c.enabled = false;
         StartCoroutine(PlayAndDestroy(4.67f));
+        StartCoroutine(spawnKey());
     }
 
     private IEnumerator TurnDamageOff(float waitTime)
@@ -197,5 +206,31 @@ public class EnemyAI : MonoBehaviour
         foreach (Renderer c in allRenderers) c.enabled = false;
         //StopBloodSplatter();
         Destroy(gameObject);
+    }
+
+    private IEnumerator spawnKey() {
+        DungeonCreator.bugCount--;
+        //need 3 keys to spawn when 1/2, 1/3 , and all enemies are killed
+        if (maxKeys < 3)
+        {
+            if (DungeonCreator.bugCount <= 0)
+            {
+                Instantiate(key, transform.position, Quaternion.identity);
+                maxKeys++;
+            }
+            else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 3)
+            {
+                Instantiate(key, transform.position, Quaternion.identity);
+                maxKeys++;
+            }
+            else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 2)
+            {
+                Instantiate(key, transform.position, Quaternion.identity);
+                maxKeys++;
+            }
+        }
+
+        //Debug.Log(maxKeys);
+        yield return null;
     }
 }

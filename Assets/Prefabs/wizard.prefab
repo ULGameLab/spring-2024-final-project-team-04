@@ -41860,8 +41860,10 @@ MonoBehaviour:
   chaseDistance: 20
   maxHp: 50
   health: 50
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 6073260575859548233}
   deathEffect: {fileID: 6587446331138488747}
+  MaxCount: 0
+  key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!136 &4901923951120005270
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -41897,8 +41899,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfbd50231715414d87c9160ce813f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxCount: 0
-  key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!1 &8057398812981986842
 GameObject:
   m_ObjectHideFlags: 0

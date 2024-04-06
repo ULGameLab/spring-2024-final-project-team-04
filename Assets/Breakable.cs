@@ -10,7 +10,7 @@ public class Breakable : MonoBehaviour
 
         if (other.gameObject.CompareTag("Decor") || other.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("Trigger 1" + gameObject);
+            //Debug.Log("Trigger 1" + gameObject);
             Destroy(gameObject);
         }
     }
@@ -19,7 +19,7 @@ public class Breakable : MonoBehaviour
        
         if (other.gameObject.CompareTag("Decor") || other.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("Trigger 2" + gameObject);
+            //Debug.Log("Trigger 2" + gameObject);
             Destroy(gameObject);
         }
     }
@@ -29,7 +29,7 @@ public class Breakable : MonoBehaviour
        
         if (collision.gameObject.CompareTag("Decor") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Attack"))
         {
-            Debug.Log("Trigger 3" + gameObject);
+            //Debug.Log("Trigger 3" + gameObject);
             Destroy(gameObject);
         }
     }

@@ -41857,7 +41857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6bd0cfc935ff4a548f653532476c528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 20
+  chaseDistance: 15
   maxHp: 50
   health: 50
   healthBar: {fileID: 6073260575859548233}
@@ -41899,6 +41899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfbd50231715414d87c9160ce813f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSP: []
 --- !u!1 &8057398812981986842
 GameObject:
   m_ObjectHideFlags: 0

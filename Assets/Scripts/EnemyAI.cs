@@ -84,7 +84,7 @@ public class EnemyAI : MonoBehaviour
                     state = EnemyState.DEFAULT;
                 }
                 animator.SetBool("isWalking", true);
-                Debug.Log("Dest = " + destination);
+                //Debug.Log("Dest = " + destination);
                 if (Vector3.Distance(transform.position, destination) <= agent.stoppingDistance)
                 {
                     state = EnemyState.DEFAULT;
@@ -215,17 +215,17 @@ public class EnemyAI : MonoBehaviour
         {
             if (DungeonCreator.bugCount <= 0)
             {
-                Instantiate(key, transform.position, Quaternion.identity);
+                Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
                 maxKeys++;
             }
             else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 3)
             {
-                Instantiate(key, transform.position, Quaternion.identity);
+                Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
                 maxKeys++;
             }
             else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 2)
             {
-                Instantiate(key, transform.position, Quaternion.identity);
+                Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
                 maxKeys++;
             }
         }

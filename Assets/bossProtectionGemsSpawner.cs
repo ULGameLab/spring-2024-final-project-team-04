@@ -23,7 +23,7 @@ public class bossProtectionGemsSpawner : MonoBehaviour
             float xPosition = UnityEngine.Random.Range(floorPosition.x - floorSize.x / 2f, floorPosition.x + floorSize.x / 2f);
             float zPosition = UnityEngine.Random.Range(floorPosition.z - floorSize.z / 2f, floorPosition.z + floorSize.z / 2f);
             Vector3 randomPosition = new Vector3(xPosition, 1, zPosition);
-            //create ball
+            //create balls
             Instantiate(crystalBall, randomPosition, Quaternion.identity);
         }
     }

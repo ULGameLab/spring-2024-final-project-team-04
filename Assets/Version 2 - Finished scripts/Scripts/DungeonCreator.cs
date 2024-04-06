@@ -103,7 +103,12 @@ public class DungeonCreator : MonoBehaviour
         CreateWalls(wallParent);
         for (int i = 0; i < 3; i++)
         {
-            AddDoors(webDoor);
+            int whichwall = UnityEngine.Random.Range(0, possibleWallHorizontalPosition.Count);
+            Vector3Int doorlocation = possibleWallHorizontalPosition[whichwall];
+            possibleWallVerticalPosition.RemoveAt(whichwall);
+
+            // Instantiate the door object
+            GameObject DoorObject = Instantiate(webDoor, doorlocation + new Vector3(0f, -0.8f, 0.0f), Quaternion.Euler(0f, 90f, 0f));
         }
         foreach (var room in listOfRooms)
         {
@@ -113,17 +118,6 @@ public class DungeonCreator : MonoBehaviour
         }
         
     }
-void AddDoors(GameObject webDoor)
-{
-        int whichwall = UnityEngine.Random.Range(0, possibleWallHorizontalPosition.Count);
-        Vector3Int doorlocation = possibleWallHorizontalPosition[whichwall];
-        possibleWallVerticalPosition.RemoveAt(whichwall);
-
-        // Instantiate the door object
-        GameObject DoorObject = Instantiate(webDoor, doorlocation + new Vector3(0f, -0.8f, 0.0f), Quaternion.Euler(0f, 90f, 0f));
-    
-
-}
 void CreateWalls(GameObject wallParent)
         {
            

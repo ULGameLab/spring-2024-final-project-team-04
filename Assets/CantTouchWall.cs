@@ -7,7 +7,7 @@ public class CantTouchWall : MonoBehaviour
     void OnCollisionEnter(Collision collision)
 
     {
-        Debug.Log("Hit wall");
+        //Debug.Log("Hit wall");
         if (collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);

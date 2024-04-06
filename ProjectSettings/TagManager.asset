@@ -19,6 +19,9 @@ TagManager:
   - Attack
   - Support
   - Spider
+  - spawnPoint
+  - sp2
+  - sp3
   layers:
   - Default
   - TransparentFX

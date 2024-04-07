@@ -185,8 +185,8 @@ public class EnemyAI : MonoBehaviour
         animator.SetBool("dead", true);
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
         foreach (Collider c in allColliders) c.enabled = false;
-        StartCoroutine(PlayAndDestroy(4.67f));
         StartCoroutine(spawnKey());
+        StartCoroutine(PlayAndDestroy(4.67f));
     }
 
     private IEnumerator TurnDamageOff(float waitTime)

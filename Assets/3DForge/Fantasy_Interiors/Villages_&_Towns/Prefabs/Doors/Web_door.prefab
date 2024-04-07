@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 6164037591845212927}
   - component: {fileID: 3248139243264583720}
   - component: {fileID: 2463474588521200325}
-  - component: {fileID: 2488666705354089151}
+  - component: {fileID: 3543554844214348789}
   m_Layer: 0
   m_Name: Web_door
   m_TagString: Untagged
@@ -262,8 +262,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2488666705354089151
-BoxCollider:
+--- !u!64 &3543554844214348789
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -280,9 +280,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.18000793, y: 2.48, z: 1.4699993}
-  m_Center: {x: 0, y: 1.24, z: 0.73499966}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 89900f12dea8f8246a01d77e3c5cf7a1, type: 3}
 --- !u!1 &3754298540052653666
 GameObject:
   m_ObjectHideFlags: 0

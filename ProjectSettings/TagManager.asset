@@ -23,6 +23,7 @@ TagManager:
   - sp2
   - sp3
   - key
+  - Gold_key
   layers:
   - Default
   - TransparentFX

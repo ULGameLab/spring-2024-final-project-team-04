@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     public int flashbangCount = 0;
     //key stuff
     public static int keyCount = 0;
-
+    public static int bossKeyCount = 0;
     AudioSource potionDrink;
 
     public TextMeshProUGUI healthNum;
@@ -138,14 +138,30 @@ public class Health : MonoBehaviour
 
             case "key":
                 keyCount++;
-                Debug.Log("key");
+                Debug.Log("key " + keyCount);
                 break;
+
+            case "Gold_key":
+                bossKeyCount++;
+                Debug.Log("Gold_key " + bossKeyCount);
+                break;
+
+            
             default:
                 break;
         }
     }
 
-    private IEnumerator ShieldPotion()
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            portal_to_dungeun.playerSP = collision.gameObject;
+            Debug.Log("floor-t");
+        }
+    }
+
+        private IEnumerator ShieldPotion()
     {
         potionDrink.Play();
         Debug.Log("Shield Potion used");

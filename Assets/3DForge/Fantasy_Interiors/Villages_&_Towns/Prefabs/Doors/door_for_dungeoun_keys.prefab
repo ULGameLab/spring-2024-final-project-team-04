@@ -108,7 +108,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfbd50231715414d87c9160ce813f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSP:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  numOfBosses: 3
+  vineDoor: {fileID: 999665162909515100, guid: 06dffdb2701bb46498773ac8b34b9efa, type: 3}

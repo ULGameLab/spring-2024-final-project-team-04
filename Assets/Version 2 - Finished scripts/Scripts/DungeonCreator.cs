@@ -105,7 +105,7 @@ public class DungeonCreator : MonoBehaviour
         {
             int whichwall = UnityEngine.Random.Range(0, possibleWallHorizontalPosition.Count);
             Vector3Int doorlocation = possibleWallHorizontalPosition[whichwall];
-            possibleWallVerticalPosition.RemoveAt(whichwall);
+            possibleWallVerticalPosition.Remove(doorlocation);
 
             // Instantiate the door object
             GameObject DoorObject = Instantiate(webDoor, doorlocation + new Vector3(0f, -0.8f, 0.0f), Quaternion.Euler(0f, 90f, 0f));
@@ -268,7 +268,7 @@ void CreateWalls(GameObject wallParent)
         float roomsize = floorObject.GetComponent<Renderer>().bounds.size.x + floorObject.GetComponent<Renderer>().bounds.size.z;
         if (roomsize > Hallway)
         {
-            spawnBugs(floorPosition, floorSize);
+           spawnBugs(floorPosition, floorSize);
         }
 }
 

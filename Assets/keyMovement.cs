@@ -9,7 +9,7 @@ public class keyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myaudio.Play();
+        //myaudio.Play();
     }
 
     // Update is called once per frame

@@ -18,7 +18,12 @@ TagManager:
   - EnemyAttack
   - Attack
   - Support
-  - GasArea
+  - Spider
+  - spawnPoint
+  - sp2
+  - sp3
+  - key
+  - Gold_key
   layers:
   - Default
   - TransparentFX

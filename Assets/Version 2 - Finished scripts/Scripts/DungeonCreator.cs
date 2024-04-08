@@ -16,12 +16,13 @@ public class DungeonCreator : MonoBehaviour
     [Range(0, 2)]
     public int roomOffset;
     //types of walls
-    public GameObject wallVertical, wallHorizontal;
+    public GameObject wallVertical, wallHorizontal, webDoor;
     public GameObject floorPrefab;
     public GameObject roofPrefab;
     public GameObject[] decorations;
     //bugs
     public GameObject[] bugs;
+    public static int bugCount = 0;
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
@@ -52,14 +53,13 @@ public class DungeonCreator : MonoBehaviour
 
             // Instantiate the decoration at the calculated position
             Instantiate(decorations[whatDecor], randomPosition, Quaternion.identity);
-        
-            }
+        }
         }
 
     //spawn enemies 
     void spawnBugs(Vector3 floorPosition, Vector3 floorSize)
     {
-        int numberOfBugs = UnityEngine.Random.Range(3,6);
+        int numberOfBugs = UnityEngine.Random.Range(1,1);
         for (int i = 0; i < numberOfBugs; i++)
         {
             // random position
@@ -68,13 +68,14 @@ public class DungeonCreator : MonoBehaviour
             float zPosition = UnityEngine.Random.Range(floorPosition.z - floorSize.z / 2f, floorPosition.z + floorSize.z / 2f);
             Vector3 randomPosition = new Vector3(xPosition, -0.8f, zPosition);
 
-            // Pick a random decoration
+            // Pick a random bug
             int whichBug = UnityEngine.Random.Range(0, 2);
 
             //create bug
             Instantiate(bugs[whichBug], randomPosition, Quaternion.identity);
+            bugCount++;
         }
-            //dont let them spawn inside stuff
+            
            
         }
     
@@ -100,6 +101,15 @@ public class DungeonCreator : MonoBehaviour
             CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner);
         }
         CreateWalls(wallParent);
+        for (int i = 0; i < 3; i++)
+        {
+            int whichwall = UnityEngine.Random.Range(0, possibleWallHorizontalPosition.Count);
+            Vector3Int doorlocation = possibleWallHorizontalPosition[whichwall];
+            possibleWallVerticalPosition.Remove(doorlocation);
+
+            // Instantiate the door object
+            GameObject DoorObject = Instantiate(webDoor, doorlocation + new Vector3(0f, -0.8f, 0.0f), Quaternion.Euler(0f, 90f, 0f));
+        }
         foreach (var room in listOfRooms)
         {
             
@@ -108,8 +118,7 @@ public class DungeonCreator : MonoBehaviour
         }
         
     }
-
-         void CreateWalls(GameObject wallParent)
+void CreateWalls(GameObject wallParent)
         {
            
         foreach (var wallPosition in possibleWallHorizontalPosition)
@@ -138,14 +147,17 @@ public class DungeonCreator : MonoBehaviour
 
     void CreateWallHorizontal(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
     {
-        // Instantiate the wall prefab
-        GameObject wallObject = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
+       
+            // Instantiate the wall prefab
+            GameObject wallObject = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
 
-        // Set the position of the wall
-        wallObject.transform.position = wallPosition;
-        wallObject.transform.position = new Vector3(wallPosition.x + 0.5f, wallPosition.y, wallPosition.z);
+            // Set the position of the wall
+            wallObject.transform.position = wallPosition;
+            wallObject.transform.position = new Vector3(wallPosition.x + 0.5f, wallPosition.y, wallPosition.z);
 
-        wallObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            wallObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        
+        
     }
 
 
@@ -256,14 +268,14 @@ public class DungeonCreator : MonoBehaviour
         float roomsize = floorObject.GetComponent<Renderer>().bounds.size.x + floorObject.GetComponent<Renderer>().bounds.size.z;
         if (roomsize > Hallway)
         {
-            //spawnBugs(floorPosition, floorSize);
+           spawnBugs(floorPosition, floorSize);
         }
 }
 
          void CreateRoof(Vector2 bottomLeftCorner, Vector2 topRightCorner)
         {
             // Calculate the position of the roof
-            Vector3 roofPosition = new Vector3((bottomLeftCorner.x + topRightCorner.x) / 2f, 0.9f, (bottomLeftCorner.y + topRightCorner.y) / 2f);
+            Vector3 roofPosition = new Vector3((bottomLeftCorner.x + topRightCorner.x) / 2f, 2f, (bottomLeftCorner.y + topRightCorner.y) / 2f);
 
             // Instantiate the roof prefab
             GameObject roofObject = Instantiate(roofPrefab, roofPosition, Quaternion.identity);

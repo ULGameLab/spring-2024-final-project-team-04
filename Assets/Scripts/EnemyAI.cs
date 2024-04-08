@@ -30,9 +30,17 @@ public class EnemyAI : MonoBehaviour
     public ParticleSystem deathEffect;
     //bool effectStarted = false;
 
+    //key stuff
+    public int MaxCount;
+    public GameObject key;
+    public static int maxKeys = 0;
     // Start is called before the first frame update
     void Start()
     {
+        //for keys
+        MaxCount = DungeonCreator.bugCount;
+        //Debug.Log(MaxCount);
+        //other
         player = GameObject.FindWithTag("Player");
         agent = this.GetComponent<NavMeshAgent>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
@@ -46,7 +54,7 @@ public class EnemyAI : MonoBehaviour
 
     private Vector3 RandomPosition()
     {
-        return new Vector3(Random.Range(-5.0f, 5.0f), 0, Random.Range(-5.0f, 5.0f));
+        return new Vector3(Random.Range(-20.0f, 20.0f), 0, Random.Range(-20.0f, 20.0f));
     }
 
     // Update is called once per frame
@@ -70,9 +78,14 @@ public class EnemyAI : MonoBehaviour
                 }
                 break;
             case EnemyState.MOVING:
+                if (!agent.hasPath && !agent.pathPending)
+                {
+                    // If the destination is unreachable, set a new destination
+                    state = EnemyState.DEFAULT;
+                }
                 animator.SetBool("isWalking", true);
-                Debug.Log("Dest = " + destination);
-                if (Vector3.Distance(transform.position, destination) < 0.05f)
+                //Debug.Log("Dest = " + destination);
+                if (Vector3.Distance(transform.position, destination) <= agent.stoppingDistance)
                 {
                     state = EnemyState.DEFAULT;
                 }
@@ -91,15 +104,17 @@ public class EnemyAI : MonoBehaviour
                 }
                 agent.SetDestination(player.transform.position);
                 animator.SetBool("isWalking", true);
-                if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance / 2)
-                {
-                    animator.SetBool("fastChase", true);
-                    agent.speed = chaseSpeed;
-                }
-                else
-                {
-                    animator.SetBool("fastChase", false);
-                    agent.speed = originSpeed;
+                if (!gameObject.CompareTag("Spider")){
+                    if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance / 2)
+                    {
+                        animator.SetBool("fastChase", true);
+                        agent.speed = chaseSpeed;
+                    }
+                    else
+                    {
+                        animator.SetBool("fastChase", false);
+                        agent.speed = originSpeed;
+                    }
                 }
                 if (Vector3.Distance(transform.position, player.transform.position) <= agent.stoppingDistance + 0.1f)
                 {
@@ -107,6 +122,14 @@ public class EnemyAI : MonoBehaviour
                 }
                 break;
             case EnemyState.ATTACK:
+                Vector3 direction = player.transform.position - transform.position;
+                direction.y = 0f;
+                // Rotate the enemy to face the player
+                if (direction != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10);
+                }
                 animator.SetBool("isAttacking", true);
                 animator.SetBool("isWalking", false);
                 if (Vector3.Distance(transform.position, player.transform.position) > agent.stoppingDistance)
@@ -162,6 +185,7 @@ public class EnemyAI : MonoBehaviour
         animator.SetBool("dead", true);
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
         foreach (Collider c in allColliders) c.enabled = false;
+        StartCoroutine(spawnKey());
         StartCoroutine(PlayAndDestroy(4.67f));
     }
 
@@ -182,5 +206,31 @@ public class EnemyAI : MonoBehaviour
         foreach (Renderer c in allRenderers) c.enabled = false;
         //StopBloodSplatter();
         Destroy(gameObject);
+    }
+
+    private IEnumerator spawnKey() {
+        DungeonCreator.bugCount--;
+        //need 3 keys to spawn when 1/2, 1/3 , and all enemies are killed
+        if (maxKeys < 3)
+        {
+            if (DungeonCreator.bugCount <= 0)
+            {
+                Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
+                maxKeys++;
+            }
+            else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 3)
+            {
+                Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
+                maxKeys++;
+            }
+            else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 2)
+            {
+                Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
+                maxKeys++;
+            }
+        }
+
+        //Debug.Log(maxKeys);
+        yield return null;
     }
 }

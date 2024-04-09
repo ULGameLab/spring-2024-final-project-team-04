@@ -37,7 +37,6 @@ public class SpiderAI : MonoBehaviour
     //key stuff
     public int MaxCount;
     public GameObject key;
-    public static int maxKeys = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -223,22 +222,22 @@ public class SpiderAI : MonoBehaviour
     private IEnumerator spawnKey() {
         DungeonCreator.bugCount--;
         //need 3 keys to spawn when 1/2, 1/3 , and all enemies are killed
-        if (maxKeys < 3)
+        if (EnemyAI.maxKeys < 3)
         {
             if (DungeonCreator.bugCount <= 0)
             {
                 Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
-                maxKeys++;
+                EnemyAI.maxKeys++;
             }
-            else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 3)
+            else if (EnemyAI.maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 3)
             {
                 Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
-                maxKeys++;
+                EnemyAI.maxKeys++;
             }
-            else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 2)
+            else if (EnemyAI.maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 2)
             {
                 Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
-                maxKeys++;
+                EnemyAI.maxKeys++;
             }
         }
 

@@ -24,6 +24,8 @@ TagManager:
   - sp3
   - key
   - Gold_key
+  - GasArea
+  - Gas_Ground
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     private int healthPotCount = 0;
     private int shieldPotCount = 0;
     public int flashbangCount = 0;
+    public int gasPotCount = 0;
     //key stuff
     public static int keyCount = 0;
     public static int bossKeyCount = 0;
@@ -24,6 +25,7 @@ public class Health : MonoBehaviour
     public TextMeshProUGUI healthNum;
     public TextMeshProUGUI shieldNum;
     public TextMeshProUGUI flashNum;
+    public TextMeshProUGUI gasNum;
 
     [SerializeField] FirstPersonController fpc;
     [SerializeField] ItemSwitch item;
@@ -49,7 +51,9 @@ public class Health : MonoBehaviour
         healthNum.text = healthPotCount.ToString();
         shieldNum.text = shieldPotCount.ToString();
         flashNum.text = flashbangCount.ToString();
-        
+        gasNum.text = gasPotCount.ToString();
+
+
     }
 
     public static void SetHealthBarValue(float value)
@@ -85,7 +89,7 @@ public class Health : MonoBehaviour
         SetHealthBarValue(health / 100);
 
         
-        if((Input.GetKeyDown(KeyCode.Alpha1)) && (healthPotCount != 0) && item.health_inv.activeSelf)
+        if((Input.GetMouseButtonDown(1)) && (healthPotCount != 0) && item.health_inv.activeSelf)
         {
             potionDrink.Play();
             health += healVal;
@@ -93,20 +97,14 @@ public class Health : MonoBehaviour
             healthNum.text = healthPotCount.ToString();
             Debug.Log("HealthPot Used");
         }
-        else if ((Input.GetKeyDown(KeyCode.Alpha2)) && (shieldPotCount != 0) && item.shields_inv.activeSelf)
+        else if ((Input.GetMouseButtonDown(1)) && (shieldPotCount != 0) && item.shields_inv.activeSelf)
         {
             StartCoroutine(ShieldPotion());
             shieldPotCount--;
             shieldNum.text = shieldPotCount.ToString();
             Debug.Log("Shield Potions: " + shieldPotCount.ToString());
         }
-       /* else if((Input.GetKeyDown(KeyCode.Alpha3)) && (flashbangCount != 0))
-        {
-            //flashbangCount--;
-            //flashNum.text = flashbangCount.ToString();
-            //flashbangCount--;
-        }
-       */
+       
     }
 
     public void OnTriggerEnter(Collider other)
@@ -146,7 +144,13 @@ public class Health : MonoBehaviour
                 Debug.Log("Gold_key " + bossKeyCount);
                 break;
 
-            
+            case "Speed":
+                ++gasPotCount;
+                gasNum.text = gasPotCount.ToString();
+                break;
+
+
+
             default:
                 break;
         }

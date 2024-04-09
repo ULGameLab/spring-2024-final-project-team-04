@@ -22,7 +22,7 @@ public class FlashBomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Alpha3)) && (hScript.flashbangCount >= 1) && item.flash_inv.activeSelf)
+        if ((Input.GetMouseButtonDown(1)) && (hScript.flashbangCount >= 1) && item.flash_inv.activeSelf)
         {
 
             GameObject currentBullet = Instantiate(Bullet, this.transform.position, this.transform.rotation) as GameObject;
@@ -35,7 +35,7 @@ public class FlashBomb : MonoBehaviour
 
             Destroy(currentBullet, destroyTime);
 
-            hScript.flashbangCount--;
+            hScript.flashbangCount -= 1;
             hScript.flashNum.text = hScript.flashbangCount.ToString();
         }
     }

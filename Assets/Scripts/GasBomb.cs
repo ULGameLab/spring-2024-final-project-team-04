@@ -10,6 +10,7 @@ public class GasBomb : MonoBehaviour
     public float BulletForce = 5.0f;
     public float destroyTime = 4f;
     //AudioSource myaudio;
+    ParticleSystem particle;
 
     [SerializeField] Health hScript;
     [SerializeField] ItemSwitch item;
@@ -34,21 +35,16 @@ public class GasBomb : MonoBehaviour
             currentBullet.GetComponent<Rigidbody>().AddForce(transform.forward * BulletForce);
 
             //myaudio.Play();
-
-            StartCoroutine(GasAreaSpawn());
-            
+            Destroy(currentBullet, 10.0f);
 
             hScript.gasPotCount -= 1;
             hScript.gasNum.text = hScript.gasPotCount.ToString();
 
         }
-    }
-
-    private IEnumerator GasAreaSpawn()
-    {
-        yield return new WaitForSeconds(5.0f);
-        Instantiate(GasArea, transform.position, transform.rotation);
-        Destroy(GasPotion, destroyTime);
 
     }
+
+   
+
+
 }

@@ -679,7 +679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4725644372996588504, guid: 7b397f667c657fb43a1e70b89c0f7eab, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Gas_Ground
       objectReference: {fileID: 0}
     - target: {fileID: 6035915370888918201, guid: 7b397f667c657fb43a1e70b89c0f7eab, type: 3}
       propertyPath: m_LocalScale.y

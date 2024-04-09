@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -87,6 +88,11 @@ public class Health : MonoBehaviour
     void Update()
     {
         SetHealthBarValue(health / 100);
+
+        if(health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
 
         
         if((Input.GetMouseButtonDown(1)) && (healthPotCount != 0) && item.health_inv.activeSelf)

@@ -10,6 +10,10 @@ public enum EnemyState { ATTACK, CHASE, MOVING, DEFAULT, DEAD };
 //[RequireComponent(typeof(AudioSource))]
 public class EnemyAI : MonoBehaviour
 {
+    //public AudioSource AttackSound;
+    //public AudioSource WalkSound;
+    public AudioSource TakeDmgSound;
+    public AudioSource DeathSound;
     GameObject player;
     NavMeshAgent agent;
     public float chaseDistance = 10.0f;
@@ -132,9 +136,10 @@ public class EnemyAI : MonoBehaviour
                 }
                 animator.SetBool("isAttacking", true);
                 animator.SetBool("isWalking", false);
+                agent.isStopped = true;
                 if (Vector3.Distance(transform.position, player.transform.position) > agent.stoppingDistance)
                 {
-                    state = EnemyState.MOVING;
+                    state = EnemyState.DEFAULT;
                     animator.SetBool("isAttacking", false);
                 }
                 break;
@@ -143,6 +148,11 @@ public class EnemyAI : MonoBehaviour
                 break;
             default:
                 break;
+        }
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        {
+            agent.isStopped = false;
         }
     }
 
@@ -164,9 +174,10 @@ public class EnemyAI : MonoBehaviour
             healthBar.UpdateHealthBar(health, maxHp);
             animator.SetBool("takeDamage", true);
             StartCoroutine(TurnDamageOff(1));
+            TakeDmgSound.Play();
             // Disable all Renderers and Colliders
-            Destroy(col.gameObject);
-            if(health <= 0)
+            col.gameObject.SetActive(false);
+            if (health <= 0)
             {
                 Die();
             }
@@ -201,7 +212,8 @@ public class EnemyAI : MonoBehaviour
         //SpawnRandomFood(transform.position);
         yield return new WaitForSeconds(waitTime);
         deathEffect.Play();
-        yield return new WaitForSeconds(0.2f);
+        DeathSound.Play();
+        yield return new WaitForSeconds(0.4f);
         Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
         foreach (Renderer c in allRenderers) c.enabled = false;
         //StopBloodSplatter();
@@ -233,4 +245,17 @@ public class EnemyAI : MonoBehaviour
         //Debug.Log(maxKeys);
         yield return null;
     }
+
+    //private IEnumerator stopWhileAtk(float waitTime)
+    //{
+    //    if (state != EnemyState.ATTACK)
+    //    {
+    //        agent.isStopped = false;
+    //    }
+    //    yield return new WaitForSeconds(waitTime);
+    //    if (state != EnemyState.ATTACK)
+    //    {
+    //        agent.isStopped = false;
+    //    }
+    //}
 }

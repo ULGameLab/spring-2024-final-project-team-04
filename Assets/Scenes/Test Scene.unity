@@ -11435,9 +11435,11 @@ MonoBehaviour:
   ShieldBuff: {fileID: 247629897}
   FlashBomb: {fileID: 5294680957979217323, guid: ebdbcaf117f48e54ca080f68de77fa09, type: 3}
   flashbangCount: 0
+  gasPotCount: 0
   healthNum: {fileID: 1540005370}
   shieldNum: {fileID: 197485217}
   flashNum: {fileID: 299839533}
+  gasNum: {fileID: 0}
   fpc: {fileID: 881111758}
   item: {fileID: 0}
 --- !u!114 &881111762

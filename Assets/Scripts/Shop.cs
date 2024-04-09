@@ -72,7 +72,7 @@ public class Shop : MonoBehaviour
     {
         confirmPurchase.SetActive(false);
         shopMenu.SetActive(false);
-        Vector3 spawnPosition = playerTransform.position + playerTransform.forward * 2f;
+        Vector3 spawnPosition = playerTransform.position + playerTransform.forward * 1.5f;
         Instantiate(selectedObject, spawnPosition, Quaternion.identity);
     }
 

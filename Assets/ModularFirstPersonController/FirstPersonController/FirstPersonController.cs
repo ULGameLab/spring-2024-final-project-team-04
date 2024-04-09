@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -151,12 +152,15 @@ public class FirstPersonController : MonoBehaviour
 
     void Start()
     {
-        //if(lockCursor)
-        //{
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //}
+        if (SceneManager.GetActiveScene().name != "Hub")
+        {
+            if (lockCursor)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
 
-        if(crosshair)
+        if (crosshair)
         {
             crosshairObject.sprite = crosshairImage;
             crosshairObject.color = crosshairColor;

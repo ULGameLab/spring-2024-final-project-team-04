@@ -189,6 +189,30 @@ public class SpiderAI : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider col)
+    {
+        if (col.gameObject.CompareTag("GloveAttack"))
+        {
+            health -= 10;
+            healthBar.UpdateHealthBar(health, maxHp);
+            animator.SetBool("takeDamage", true);
+            StartCoroutine(TurnDamageOff(1));
+            TakeDmgSound.Play();
+            // Disable all Renderers and Colliders
+            col.gameObject.SetActive(false);
+            if (health <= 0)
+            {
+                Die();
+            }
+            //Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
+            //foreach (Renderer c in allRenderers) c.enabled = false;
+            //Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
+            //foreach (Collider c in allColliders) c.enabled = false;
+            //gameObject.GetComponent<ParticleSystemRenderer>().enabled = true;
+            //StartCoroutine(PlayAndDestroy(myaudio.clip.length));
+        }
+    }
+
     void Die()
     {
         state = EnemyState.DEAD;

@@ -6099,6 +6099,8 @@ MonoBehaviour:
   gasNum: {fileID: 912060642}
   fpc: {fileID: 785622211}
   item: {fileID: 785622223}
+  spiderHealth: {fileID: 1942111500}
+  gloves: {fileID: 1846916070}
 --- !u!114 &785622211 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
@@ -6672,7 +6674,7 @@ Transform:
   m_GameObject: {fileID: 1012571004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: -6.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6697,8 +6699,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 31.4, y: 5, z: 25.12}
-  m_Center: {x: 9.74, y: 0, z: 7.7}
+  m_Size: {x: 36.01537, y: 11.600695, z: 30.747202}
+  m_Center: {x: 12.047655, y: 3.3002603, z: 10.513569}
 --- !u!33 &1012571008
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12893,7 +12895,7 @@ GameObject:
   - component: {fileID: 1846916070}
   m_Layer: 0
   m_Name: Particles
-  m_TagString: GloveAttack
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18100,6 +18102,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 10}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1942111500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7573060469984493413, guid: bcd3df37ff9cc487e978d72d73c59dde, type: 3}
+  m_PrefabInstance: {fileID: 1362850937}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22d2d82a7c2044485b15b3f83f7e236f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1971983184 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407466, guid: dd93966018ccadd459c92701f0e8e129, type: 3}

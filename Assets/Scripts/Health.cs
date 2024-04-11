@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     public GameObject FlashBomb;
     private static Image HealthBarImage;
     private float health = 75.0f;
+    private float maxHealth = 100.0f;
     private float healVal = 10.0f;
     private int healthPotCount = 0;
     private int shieldPotCount = 0;
@@ -30,10 +31,13 @@ public class Health : MonoBehaviour
 
     [SerializeField] FirstPersonController fpc;
     [SerializeField] ItemSwitch item;
-    
-   
+    [SerializeField] SpiderAI spiderHealth;
+    [SerializeField] EnemyAI wizardHealth;
+    [SerializeField] Gloves gloves;
 
-   
+
+
+
 
 
     // Start is called before the first frame update
@@ -87,7 +91,8 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetHealthBarValue(health / 100);
+       
+        SetHealthBarValue(health / maxHealth);
 
         if(health <= 0)
         {
@@ -110,7 +115,12 @@ public class Health : MonoBehaviour
             shieldNum.text = shieldPotCount.ToString();
             Debug.Log("Shield Potions: " + shieldPotCount.ToString());
         }
-       
+
+        if ((spiderHealth.gloveDamage == true && gloves.hitbox.activeSelf) || (wizardHealth.gloveDamage == true && gloves.hitbox.activeSelf))
+        {
+            health += 0.0625f;
+        }
+
     }
 
     public void OnTriggerEnter(Collider other)

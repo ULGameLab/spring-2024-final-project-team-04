@@ -19,6 +19,7 @@ public class SpiderAI : MonoBehaviour
     public float chaseDistance = 10.0f;
     public float maxHp = 50;
     public float health = 50;
+    public float currHealth;
     [SerializeField] EnemyHealthBar healthBar;
     //public GameObject[] foodPrefabs; // Array of your food prefabs
 
@@ -34,12 +35,16 @@ public class SpiderAI : MonoBehaviour
     public ParticleSystem deathEffect;
     //bool effectStarted = false;
 
+    public bool gloveDamage = false;
+
     //key stuff
     public int MaxCount;
     public GameObject key;
     // Start is called before the first frame update
     void Start()
     {
+
+        currHealth = health;
         //for keys
         MaxCount = DungeonCreator.bugCount;
         //Debug.Log(MaxCount);
@@ -186,6 +191,43 @@ public class SpiderAI : MonoBehaviour
             //foreach (Collider c in allColliders) c.enabled = false;
             //gameObject.GetComponent<ParticleSystemRenderer>().enabled = true;
             //StartCoroutine(PlayAndDestroy(myaudio.clip.length));
+        }
+        else if (col.CompareTag("GloveAttack") || col.CompareTag("GasArea"))
+        {
+            gloveDamage = true;
+            StartCoroutine(ApplyDamage());
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("GloveAttack") || other.CompareTag("GasArea"))
+        {
+            gloveDamage = false;
+        }
+    }
+
+    IEnumerator ApplyDamage()
+    {
+        float i = 0; 
+        while (gloveDamage && health > 0 && i < 5.0f)
+        {
+            yield return new WaitForSeconds(0.75f);
+
+            TakeDamage(2);
+            healthBar.UpdateHealthBar(health, maxHp);
+            i += 1.0f;
+        }
+    }
+
+    void TakeDamage(float amount)
+    {
+        health -= amount;
+        Debug.Log("Enemy health: " + health);
+
+        if (health <= 0)
+        {
+            Die();
         }
     }
 

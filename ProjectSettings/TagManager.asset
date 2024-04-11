@@ -26,6 +26,7 @@ TagManager:
   - Gold_key
   - GasArea
   - Gas_Ground
+  - GloveAttack
   layers:
   - Default
   - TransparentFX

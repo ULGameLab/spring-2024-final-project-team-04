@@ -32,6 +32,7 @@ public class Health : MonoBehaviour
     [SerializeField] FirstPersonController fpc;
     [SerializeField] ItemSwitch item;
     [SerializeField] SpiderAI spiderHealth;
+    [SerializeField] EnemyAI wizardHealth;
     [SerializeField] Gloves gloves;
 
 
@@ -115,7 +116,7 @@ public class Health : MonoBehaviour
             Debug.Log("Shield Potions: " + shieldPotCount.ToString());
         }
 
-        if (spiderHealth.gloveDamage == true && gloves.hitbox.activeSelf)
+        if ((spiderHealth.gloveDamage == true && gloves.hitbox.activeSelf) || (wizardHealth.gloveDamage == true && gloves.hitbox.activeSelf))
         {
             health += 0.0625f;
         }

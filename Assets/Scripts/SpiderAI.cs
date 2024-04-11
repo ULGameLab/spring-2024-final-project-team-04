@@ -192,7 +192,7 @@ public class SpiderAI : MonoBehaviour
             //gameObject.GetComponent<ParticleSystemRenderer>().enabled = true;
             //StartCoroutine(PlayAndDestroy(myaudio.clip.length));
         }
-        else if (col.CompareTag("GloveAttack"))
+        else if (col.CompareTag("GloveAttack") || col.CompareTag("GasArea"))
         {
             gloveDamage = true;
             StartCoroutine(ApplyDamage());
@@ -201,7 +201,7 @@ public class SpiderAI : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("GloveAttack"))
+        if (other.CompareTag("GloveAttack") || other.CompareTag("GasArea"))
         {
             gloveDamage = false;
         }

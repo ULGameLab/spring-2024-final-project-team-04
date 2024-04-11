@@ -11934,11 +11934,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TakeDmgSound: {fileID: 388700087251492013}
   DeathSound: {fileID: 8900772083837676071}
-  chaseDistance: 15
+  chaseDistance: 20
   maxHp: 50
   health: 50
   healthBar: {fileID: 9008928147193068895}
   deathEffect: {fileID: 2944883433612543864}
+  gloveDamage: 0
   MaxCount: 0
   key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!65 &1952795785647186498
@@ -12173,8 +12174,10 @@ MonoBehaviour:
   chaseDistance: 10
   maxHp: 50
   health: 50
+  currHealth: 0
   healthBar: {fileID: 9008928147193068895}
   deathEffect: {fileID: 2944883433612543864}
+  gloveDamage: 0
   MaxCount: 0
   key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!1 &5858353433909713668

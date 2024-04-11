@@ -41860,11 +41860,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TakeDmgSound: {fileID: 133615989841556322}
   DeathSound: {fileID: 2065615760677412740}
-  chaseDistance: 15
+  chaseDistance: 20
   maxHp: 50
   health: 50
   healthBar: {fileID: 6073260575859548233}
   deathEffect: {fileID: 6587446331138488747}
+  gloveDamage: 0
   MaxCount: 0
   key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!136 &4901923951120005270

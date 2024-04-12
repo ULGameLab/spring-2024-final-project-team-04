@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 8528820825032186994}
   - component: {fileID: 376191589725275928}
   - component: {fileID: 1525376526065760801}
+  - component: {fileID: 5485599003045315479}
   m_Layer: 0
   m_Name: Stool_square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8528820825029762706
 Transform:
@@ -135,3 +136,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45142195, y: 0.48594177, z: 0.45142084}
   m_Center: {x: 0, y: 0.24297088, z: -0.00000008195639}
+--- !u!114 &5485599003045315479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8528820825029984946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c0f8adf049dce42b40f192834b69b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

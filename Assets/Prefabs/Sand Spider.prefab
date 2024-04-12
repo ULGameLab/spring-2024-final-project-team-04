@@ -11839,7 +11839,6 @@ GameObject:
   - component: {fileID: 3105021197017474708}
   - component: {fileID: 8711276570615538746}
   - component: {fileID: 7691082489575182659}
-  - component: {fileID: 3223767203851057064}
   - component: {fileID: 1952795785647186498}
   - component: {fileID: 388700087251492013}
   - component: {fileID: 8900772083837676071}
@@ -11920,28 +11919,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3223767203851057064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5673786357896791899}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6bd0cfc935ff4a548f653532476c528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TakeDmgSound: {fileID: 388700087251492013}
-  DeathSound: {fileID: 8900772083837676071}
-  chaseDistance: 20
-  maxHp: 50
-  health: 50
-  healthBar: {fileID: 9008928147193068895}
-  deathEffect: {fileID: 2944883433612543864}
-  gloveDamage: 0
-  MaxCount: 0
-  key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!65 &1952795785647186498
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12176,6 +12153,7 @@ MonoBehaviour:
   health: 50
   currHealth: 0
   healthBar: {fileID: 9008928147193068895}
+  checkInterval: 1
   deathEffect: {fileID: 2944883433612543864}
   gloveDamage: 0
   MaxCount: 0

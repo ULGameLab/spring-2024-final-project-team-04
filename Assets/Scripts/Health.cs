@@ -43,7 +43,10 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-
+        // Reset static variables when the scene starts
+        keyCount = 0;
+        bossKeyCount = 0;
+        //
         potionDrink = GetComponent<AudioSource>();
 
         if (HealthBar != null)

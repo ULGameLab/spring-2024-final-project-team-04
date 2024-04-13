@@ -51,6 +51,8 @@ public class EnemyAI : MonoBehaviour
         gloveDamage = false;
         //for keys
         MaxCount = DungeonCreator.bugCount;
+        //reset static variables 
+        maxKeys = 0;
         //Debug.Log(MaxCount);
         //other
         player = GameObject.FindWithTag("Player");

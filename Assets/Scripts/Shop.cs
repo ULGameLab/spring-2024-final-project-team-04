@@ -30,7 +30,7 @@ public class Shop : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Shop" && !shopMenu.activeSelf)
+        if (other.tag == "PlayerTrigger" && !shopMenu.activeSelf)
         {
             Debug.Log("Entered Shop.");
             openShopMessage.SetActive(true);
@@ -44,7 +44,7 @@ public class Shop : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Shop")
+        if (other.tag == "PlayerTrigger")
         {
             Debug.Log("Exited Shop.");
             openShopMessage.SetActive(false);
@@ -72,7 +72,7 @@ public class Shop : MonoBehaviour
     {
         confirmPurchase.SetActive(false);
         shopMenu.SetActive(false);
-        Vector3 spawnPosition = playerTransform.position + playerTransform.forward * 1.5f;
+        Vector3 spawnPosition = playerTransform.position + playerTransform.forward;
         Instantiate(selectedObject, spawnPosition, Quaternion.identity);
     }
 

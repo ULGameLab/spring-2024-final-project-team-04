@@ -15,10 +15,10 @@ public class Health : MonoBehaviour
     private float health = 75.0f;
     private float maxHealth = 100.0f;
     private float healVal = 10.0f;
-    private int healthPotCount = 0;
-    private int shieldPotCount = 0;
-    public int flashbangCount = 0;
-    public int gasPotCount = 0;
+    private static int healthPotCount = 0;
+    private static int shieldPotCount = 0;
+    public static int flashbangCount = 0;
+    public static int gasPotCount = 0;
     //key stuff
     public static int keyCount = 0;
     public static int bossKeyCount = 0;

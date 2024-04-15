@@ -30,6 +30,8 @@ public class DungeonCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //reset static variable
+        bugCount = 0;
         CreateDungeon();
     }
     

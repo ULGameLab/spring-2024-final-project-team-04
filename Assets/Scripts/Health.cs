@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -14,10 +15,10 @@ public class Health : MonoBehaviour
     private float health = 75.0f;
     private float maxHealth = 100.0f;
     private float healVal = 10.0f;
-    private int healthPotCount = 0;
-    private int shieldPotCount = 0;
-    public int flashbangCount = 0;
-    public int gasPotCount = 0;
+    private static int healthPotCount = 0;
+    private static int shieldPotCount = 0;
+    public static int flashbangCount = 0;
+    public static int gasPotCount = 0;
     //key stuff
     public static int keyCount = 0;
     public static int bossKeyCount = 0;
@@ -42,7 +43,10 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-
+        // Reset static variables when the scene starts
+        keyCount = 0;
+        bossKeyCount = 0;
+        //
         potionDrink = GetComponent<AudioSource>();
 
         if (HealthBar != null)
@@ -93,6 +97,11 @@ public class Health : MonoBehaviour
        
         SetHealthBarValue(health / maxHealth);
 
+        if(health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+
         
         if((Input.GetMouseButtonDown(1)) && (healthPotCount != 0) && item.health_inv.activeSelf)
         {
@@ -110,7 +119,9 @@ public class Health : MonoBehaviour
             Debug.Log("Shield Potions: " + shieldPotCount.ToString());
         }
 
-        if ((spiderHealth.gloveDamage == true && gloves.hitbox.activeSelf) || (wizardHealth.gloveDamage == true && gloves.hitbox.activeSelf))
+        if ((spiderHealth != null && spiderHealth.gloveDamage == true && gloves != null && gloves.hitbox != null && gloves.hitbox.activeSelf)
+            || (wizardHealth != null && wizardHealth.gloveDamage == true && gloves != null && gloves.hitbox != null && gloves.hitbox.activeSelf))
+
         {
             health += 0.0625f;
         }

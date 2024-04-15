@@ -31,6 +31,11 @@ public class SpiderAI : MonoBehaviour
     private float chaseSpeed;
     AudioSource myaudio;
 
+    private Vector3 lastPosition;
+    public float checkInterval = 1f; // Interval to check if the agent is stuck
+    private float timer;
+    private float radius = 20f;
+
     //Explosion Effect
     public ParticleSystem deathEffect;
     //bool effectStarted = false;
@@ -40,7 +45,6 @@ public class SpiderAI : MonoBehaviour
     //key stuff
     public int MaxCount;
     public GameObject key;
-    public static int maxKeys = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,11 +63,30 @@ public class SpiderAI : MonoBehaviour
         chaseSpeed = agent.speed * 1.5f;
         //myaudio = GetComponent<AudioSource>();
         //deathEffect = transform.GetComponent<ParticleSystem>();
+        timer = 0f;
+        lastPosition = transform.position;
     }
 
     private Vector3 RandomPosition()
     {
         return new Vector3(Random.Range(-20.0f, 20.0f), 0, Random.Range(-20.0f, 20.0f));
+    }
+
+    Vector3 GetRandomNavMeshPosition(Vector3 center, float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += center;
+
+        NavMeshHit navMeshHit;
+
+        // Sample a position on the NavMesh closest to the random direction
+        if (NavMesh.SamplePosition(randomDirection, out navMeshHit, radius, NavMesh.AllAreas))
+        {
+            return navMeshHit.position;
+        }
+
+        // If no valid position is found, return the center position
+        return center;
     }
 
     // Update is called once per frame
@@ -82,7 +105,7 @@ public class SpiderAI : MonoBehaviour
                 {
                     state = EnemyState.MOVING;
                     animator.SetBool("inCombat", false);
-                    destination = transform.position + RandomPosition();
+                    destination = GetRandomNavMeshPosition(transform.position, radius);
                     agent.SetDestination(destination);
                 }
                 break;
@@ -153,6 +176,24 @@ public class SpiderAI : MonoBehaviour
                 break;
             default:
                 break;
+        }
+
+        // Check if the agent is stuck
+        timer += Time.deltaTime;
+        //Debug.Log($"Timer: {timer}");
+        if (timer >= checkInterval)
+        {
+            timer = 0f;
+            if (IsStuck())
+            {
+                Debug.Log("Is Stuck!");
+                // If the agent is stuck, reset its destination
+                state = EnemyState.DEFAULT;
+            }
+            else
+            {
+                lastPosition = transform.position;
+            }
         }
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
@@ -265,22 +306,22 @@ public class SpiderAI : MonoBehaviour
     private IEnumerator spawnKey() {
         DungeonCreator.bugCount--;
         //need 3 keys to spawn when 1/2, 1/3 , and all enemies are killed
-        if (maxKeys < 3)
+        if (EnemyAI.maxKeys < 3)
         {
             if (DungeonCreator.bugCount <= 0)
             {
                 Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
-                maxKeys++;
+                EnemyAI.maxKeys++;
             }
-            else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 3)
+            else if (EnemyAI.maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 3)
             {
                 Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
-                maxKeys++;
+                EnemyAI.maxKeys++;
             }
-            else if (maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 2)
+            else if (EnemyAI.maxKeys < 2 && DungeonCreator.bugCount <= MaxCount / 2)
             {
                 Instantiate(key, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
-                maxKeys++;
+                EnemyAI.maxKeys++;
             }
         }
 
@@ -288,16 +329,9 @@ public class SpiderAI : MonoBehaviour
         yield return null;
     }
 
-    //private IEnumerator stopWhileAtk(float waitTime)
-    //{
-    //    if (state != EnemyState.ATTACK)
-    //    {
-    //        agent.isStopped = false;
-    //    }
-    //    yield return new WaitForSeconds(waitTime);
-    //    if (state != EnemyState.ATTACK)
-    //    {
-    //        agent.isStopped = false;
-    //    }
-    //}
+    bool IsStuck()
+    {
+        // Check if the agent's position hasn't changed significantly
+        return (Vector3.Distance(transform.position, lastPosition) < 0.1f && state == EnemyState.MOVING);
+    }
 }

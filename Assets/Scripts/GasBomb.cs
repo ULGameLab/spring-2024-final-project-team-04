@@ -25,7 +25,7 @@ public class GasBomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetMouseButtonDown(1)) && (hScript.gasPotCount >= 1) && item.gas_inv.activeSelf)
+        if ((Input.GetMouseButtonDown(1)) && (Health.gasPotCount >= 1) && item.gas_inv.activeSelf)
         {
 
             GameObject currentBullet = Instantiate(GasPotion, this.transform.position, this.transform.rotation) as GameObject;
@@ -37,8 +37,8 @@ public class GasBomb : MonoBehaviour
             //myaudio.Play();
             Destroy(currentBullet, 10.0f);
 
-            hScript.gasPotCount -= 1;
-            hScript.gasNum.text = hScript.gasPotCount.ToString();
+            Health.gasPotCount -= 1;
+            hScript.gasNum.text = Health.gasPotCount.ToString();
 
         }
 

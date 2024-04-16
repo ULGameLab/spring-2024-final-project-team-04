@@ -11302,6 +11302,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 876919393}
+  - {fileID: 678137081}
   - {fileID: 762718377}
   - {fileID: 1759092923}
   - {fileID: 1678246084}
@@ -11312,7 +11314,6 @@ Transform:
   - {fileID: 1144901812}
   - {fileID: 2035715543}
   - {fileID: 798452388}
-  - {fileID: 678137081}
   - {fileID: 1452937102}
   - {fileID: 1784111512}
   - {fileID: 311967618}
@@ -11371,7 +11372,6 @@ Transform:
   - {fileID: 2015240562}
   - {fileID: 1793955633}
   - {fileID: 1059241956}
-  - {fileID: 876919393}
   - {fileID: 1839521023}
   - {fileID: 985725008}
   - {fileID: 1079378659}
@@ -26437,6 +26437,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cauldron_Full (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1359375955376506586, guid: d6ade90f396755c42b43f8006323ec2c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6796805398523835098, guid: d6ade90f396755c42b43f8006323ec2c, type: 3}
       propertyPath: m_Convex
       value: 1
@@ -27649,6 +27653,10 @@ PrefabInstance:
     - target: {fileID: 1359375955376506586, guid: d6ade90f396755c42b43f8006323ec2c, type: 3}
       propertyPath: m_Name
       value: Cauldron_Full
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359375955376506586, guid: d6ade90f396755c42b43f8006323ec2c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6796805398523835098, guid: d6ade90f396755c42b43f8006323ec2c, type: 3}
       propertyPath: m_Convex
@@ -42250,7 +42258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1506604640
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -44983,8 +44991,6 @@ MonoBehaviour:
   HealthBar: {fileID: 730272383}
   ShieldBuff: {fileID: 1399651233}
   FlashBomb: {fileID: 5294680957979217323, guid: ebdbcaf117f48e54ca080f68de77fa09, type: 3}
-  flashbangCount: 0
-  gasPotCount: 0
   healthNum: {fileID: 1381759726}
   shieldNum: {fileID: 1168921759}
   flashNum: {fileID: 541762249}

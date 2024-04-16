@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class StaffShooting : MonoBehaviour
+public class FireBall : MonoBehaviour
 {
 
     public GameObject Bullet;
@@ -11,7 +11,7 @@ public class StaffShooting : MonoBehaviour
     public float destroyTime = 3.0f;
     AudioSource myaudio;
     ParticleSystem particle;
-    
+
     public float coolDown = 0.05f;
     public float nextFire = 0.0f;
 

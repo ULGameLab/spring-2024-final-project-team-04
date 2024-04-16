@@ -551,6 +551,8 @@ MonoBehaviour:
   Bullet: {fileID: 5455506552566653772, guid: 2cc1c621dded3d24c81a9543b1fb5390, type: 3}
   BulletForce: 2500
   destroyTime: 3
+  coolDown: 0.5
+  nextFire: 0
 --- !u!82 &287381123
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6091,8 +6093,6 @@ MonoBehaviour:
   HealthBar: {fileID: 1353163349}
   ShieldBuff: {fileID: 2129135998}
   FlashBomb: {fileID: 5294680957979217323, guid: ebdbcaf117f48e54ca080f68de77fa09, type: 3}
-  flashbangCount: 0
-  gasPotCount: 0
   healthNum: {fileID: 208482063}
   shieldNum: {fileID: 610306308}
   flashNum: {fileID: 1496670052}
@@ -6720,9 +6720,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1018530077}
   - component: {fileID: 1018530079}
-  - component: {fileID: 1018530078}
   - component: {fileID: 1018530081}
   - component: {fileID: 1018530080}
+  - component: {fileID: 1018530082}
   m_Layer: 0
   m_Name: FireBallSpawn
   m_TagString: Untagged
@@ -6745,21 +6745,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 606868114}
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
---- !u!114 &1018530078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018530076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2233152a5b7f77c44a9939eeafd0a11a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bullet: {fileID: 4145964298013170615, guid: b0d0729ac5a787e448a481f777eac505, type: 3}
-  BulletForce: 500
-  destroyTime: 3
 --- !u!82 &1018530079
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7006,7 +6991,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -11714,6 +11699,23 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1018530082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018530076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca559792c6201948a9b46d24dbba79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 1646831578}
+  BulletForce: 2500
+  destroyTime: 3
+  coolDown: 2
+  nextFire: 0
 --- !u!1 &1049044802
 GameObject:
   m_ObjectHideFlags: 0
@@ -12636,6 +12638,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587313202}
   m_CullTransparentMesh: 1
+--- !u!1 &1646831578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4145964298013170615, guid: b0d0729ac5a787e448a481f777eac505, type: 3}
+  m_PrefabInstance: {fileID: 4041624177599836256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1650072492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12789,6 +12796,10 @@ PrefabInstance:
     - target: {fileID: 7876894970948490883, guid: 380ece5588baf4e108641a148d67d425, type: 3}
       propertyPath: m_Name
       value: wizard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876894970948490883, guid: 380ece5588baf4e108641a148d67d425, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8428096246032064788, guid: 380ece5588baf4e108641a148d67d425, type: 3}
       propertyPath: m_LocalPosition.x

@@ -206,6 +206,12 @@ public class FirstPersonController : MonoBehaviour
 
     private void Update()
     {
+        // Quit
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            EditorApplication.isPlaying = false;
+        }
+
         #region Camera
 
         // Control camera movement

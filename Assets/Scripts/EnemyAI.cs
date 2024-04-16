@@ -135,23 +135,27 @@ public class EnemyAI : MonoBehaviour
                     animator.SetBool("inCombat", false);
                     break;
                 }
-                agent.SetDestination(player.transform.position);
-                animator.SetBool("isWalking", true);
-                if (!gameObject.CompareTag("Spider")){
-                    if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance / 2)
-                    {
-                        animator.SetBool("fastChase", true);
-                        agent.speed = chaseSpeed;
-                    }
-                    else
-                    {
-                        animator.SetBool("fastChase", false);
-                        agent.speed = originSpeed;
-                    }
-                }
-                if (Vector3.Distance(transform.position, player.transform.position) <= agent.stoppingDistance + 0.1f)
+                else
                 {
-                    state = EnemyState.ATTACK;
+                    agent.SetDestination(player.transform.position);
+                    animator.SetBool("isWalking", true);
+                    if (!gameObject.CompareTag("Spider"))
+                    {
+                        if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance / 2)
+                        {
+                            animator.SetBool("fastChase", true);
+                            agent.speed = chaseSpeed;
+                        }
+                        else
+                        {
+                            animator.SetBool("fastChase", false);
+                            agent.speed = originSpeed;
+                        }
+                    }
+                    if (Vector3.Distance(transform.position, player.transform.position) <= agent.stoppingDistance + 0.1f)
+                    {
+                        state = EnemyState.ATTACK;
+                    }
                 }
                 break;
             case EnemyState.ATTACK:

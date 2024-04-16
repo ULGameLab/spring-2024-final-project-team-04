@@ -26,7 +26,7 @@ public class FlashBomb : MonoBehaviour
         {
 
             GameObject currentBullet = Instantiate(Bullet, this.transform.position, this.transform.rotation) as GameObject;
-
+           
             currentBullet.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
             currentBullet.GetComponent<Rigidbody>().AddForce(transform.forward * BulletForce);

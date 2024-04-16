@@ -239,6 +239,18 @@ public class SpiderAI : MonoBehaviour
             gloveDamage = true;
             StartCoroutine(ApplyDamage());
         }
+        else if (col.CompareTag("FlashAOE"))
+        {
+            StartCoroutine(FlashBang());
+        }
+    }
+
+    private IEnumerator FlashBang()
+    {
+        agent.isStopped = true;
+        yield return new WaitForSeconds(5.0f);
+        agent.isStopped = false;
+        state = EnemyState.DEFAULT;
     }
 
     void OnTriggerExit(Collider other)

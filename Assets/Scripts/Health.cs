@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
     public GameObject ShieldBuff;
     public GameObject FlashBomb;
     private static Image HealthBarImage;
+    [SerializeField] 
     private float health = 75.0f;
     private float maxHealth = 100.0f;
     private float healVal = 10.0f;
@@ -62,6 +63,11 @@ public class Health : MonoBehaviour
         gasNum.text = gasPotCount.ToString();
 
 
+    }
+
+    public void SetHealth(float newHealth)
+    {
+        health = newHealth;
     }
 
     public static void SetHealthBarValue(float value)

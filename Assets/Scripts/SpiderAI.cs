@@ -41,6 +41,7 @@ public class SpiderAI : MonoBehaviour
     //bool effectStarted = false;
 
     public bool gloveDamage = false;
+    public bool fireDamage = false;
 
     //key stuff
     public int MaxCount;
@@ -243,6 +244,23 @@ public class SpiderAI : MonoBehaviour
         {
             StartCoroutine(FlashBang());
         }
+        else if (col.CompareTag("FireAttack"))
+        {
+            health -= 10;
+            healthBar.UpdateHealthBar(health, maxHp);
+            animator.SetBool("takeDamage", true);
+            StartCoroutine(TurnDamageOff(1));
+            TakeDmgSound.Play();
+            // Disable all Renderers and Colliders
+            col.gameObject.SetActive(false);
+            if (health <= 0)
+            {
+                Die();
+            }
+            fireDamage = true;
+            Debug.Log("Fire Damage");
+            StartCoroutine(ApplyFireDamage());
+        }
     }
 
     private IEnumerator FlashBang()
@@ -271,6 +289,23 @@ public class SpiderAI : MonoBehaviour
             TakeDamage(2);
             healthBar.UpdateHealthBar(health, maxHp);
             i += 1.0f;
+        }
+    }
+    IEnumerator ApplyFireDamage()
+    {
+        float i = 0;
+        while (fireDamage && health > 0 && i <= 7.0f)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            TakeDamage(2);
+            healthBar.UpdateHealthBar(health, maxHp);
+            i += 1.0f;
+            if (i == 7.0f)
+            {
+                fireDamage = false;
+                Debug.Log("FireDamage = false");
+            }
         }
     }
 

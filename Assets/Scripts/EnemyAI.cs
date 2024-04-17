@@ -40,6 +40,7 @@ public class EnemyAI : MonoBehaviour
     //bool effectStarted = false;
 
     public bool gloveDamage;
+    public bool fireDamage;
 
     //key stuff
     public int MaxCount;
@@ -49,6 +50,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         gloveDamage = false;
+        fireDamage = false;
         //for keys
         MaxCount = DungeonCreator.bugCount;
         //reset static variables 
@@ -244,6 +246,23 @@ public class EnemyAI : MonoBehaviour
             gloveDamage = true;
             StartCoroutine(ApplyDamage());
         }
+        else if (col.CompareTag("FireAttack"))
+        {
+            health -= 10;
+            healthBar.UpdateHealthBar(health, maxHp);
+            animator.SetBool("takeDamage", true);
+            StartCoroutine(TurnDamageOff(1));
+            TakeDmgSound.Play();
+            // Disable all Renderers and Colliders
+            col.gameObject.SetActive(false);
+            if (health <= 0)
+            {
+                Die();
+            }
+            fireDamage = true;
+            Debug.Log("Fire Damage");
+            StartCoroutine(ApplyFireDamage());
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -264,6 +283,23 @@ public class EnemyAI : MonoBehaviour
             TakeDamage(2);
             healthBar.UpdateHealthBar(health, maxHp);
             i += 1.0f;
+        }
+    }
+    IEnumerator ApplyFireDamage()
+    {
+        float i = 0;
+        while (fireDamage && health > 0 && i <= 7.0f)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            TakeDamage(2);
+            healthBar.UpdateHealthBar(health, maxHp);
+            i += 1.0f;
+            if (i == 7.0f)
+            {
+                fireDamage = false;
+                Debug.Log("FireDamage = false");
+            }
         }
     }
 

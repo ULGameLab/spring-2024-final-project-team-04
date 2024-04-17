@@ -19,11 +19,13 @@ public class Gloves : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
+        if (pausemenu.paused == false)
         {
-            StartCoroutine(GloveBlast());
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                StartCoroutine(GloveBlast());
+            }
         }
-        
     }
 
     private IEnumerator GloveBlast()

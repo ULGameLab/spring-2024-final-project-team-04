@@ -23,7 +23,7 @@ public class FlashBlast : MonoBehaviour
 
     private IEnumerator flashBlast()
     {
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(1.0f);
         flashArea.SetActive(true);
         Debug.Log("FlashArea = true");
     }

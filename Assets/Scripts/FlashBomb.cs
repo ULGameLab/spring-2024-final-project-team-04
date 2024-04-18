@@ -7,7 +7,7 @@ public class FlashBomb : MonoBehaviour
 {
     public GameObject Bullet;
     public float BulletForce = 5.0f;
-    public float destroyTime = 4f;
+    public float destroyTime = 1f;
     AudioSource myaudio;
 
     [SerializeField] Health hScript;

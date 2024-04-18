@@ -265,9 +265,11 @@ public class SpiderAI : MonoBehaviour
 
     private IEnumerator FlashBang()
     {
-        agent.isStopped = true;
-        yield return new WaitForSeconds(5.0f);
-        agent.isStopped = false;
+        Debug.Log("Flash working");
+        state = EnemyState.DEAD;
+        animator.SetBool("isAttacking", false);
+        animator.SetBool("isWalking", false);
+        yield return new WaitForSeconds(2.0f);
         state = EnemyState.DEFAULT;
     }
 

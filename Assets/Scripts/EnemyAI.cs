@@ -246,6 +246,10 @@ public class EnemyAI : MonoBehaviour
             gloveDamage = true;
             StartCoroutine(ApplyDamage());
         }
+        else if (col.CompareTag("FlashAOE"))
+        {
+            StartCoroutine(FlashBang());
+        }
         else if (col.CompareTag("FireAttack"))
         {
             health -= 10;
@@ -263,6 +267,16 @@ public class EnemyAI : MonoBehaviour
             Debug.Log("Fire Damage");
             StartCoroutine(ApplyFireDamage());
         }
+    }
+
+    private IEnumerator FlashBang()
+    {
+        Debug.Log("Flash working");
+        state = EnemyState.DEAD;
+        animator.SetBool("isAttacking", false);
+        animator.SetBool("isWalking", false);
+        yield return new WaitForSeconds(2.0f);
+        state = EnemyState.DEFAULT;
     }
 
     void OnTriggerExit(Collider other)

@@ -48,20 +48,6 @@ public class pausemenu : MonoBehaviour
         Application.Quit();
 #endif
     }
-    public void MainMenuButton()
-    {
-        Debug.Log("MainMenuButton");
-        TogglePauseMenu();
-        SceneManager.LoadScene("Start Screen");
-    }
-
-    public void RestartGameButton()
-    {
-        Debug.Log("RestartButton");
-        TogglePauseMenu();
-        SceneManager.LoadScene("Terrain");
-    }
-
     public void fullHeal() {
         HOBJ.SetHealth(100.0f);
     }
@@ -71,9 +57,13 @@ public class pausemenu : MonoBehaviour
         CM.AddCurrency(50);
     }
 
-    public void slow_Enemies()
-    {
-   
+    public void moreBombs() {
+        HOBJ.SetBombs(5);
+    }
+
+    public void hub() {
+        TogglePauseMenu();
+        SceneManager.LoadScene("Hub");
     }
 
     public bool IsPaused()

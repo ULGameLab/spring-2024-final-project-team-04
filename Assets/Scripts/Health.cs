@@ -17,8 +17,10 @@ public class Health : MonoBehaviour
     private float maxHealth = 100.0f;
     private float healVal = 10.0f;
     private static int healthPotCount = 0;
-    private static int shieldPotCount = 5;
-    public static int flashbangCount = 5;
+    private static int shieldPotCount = 0;
+    [SerializeField]
+    public static int flashbangCount = 0;
+    [SerializeField]
     public static int gasPotCount = 0;
     public bool shieldOn = false;
     //key stuff
@@ -68,10 +70,17 @@ public class Health : MonoBehaviour
 
 
     }
-
+    //for cheats 
     public void SetHealth(float newHealth)
     {
         health = newHealth;
+    }
+    public void SetBombs(int amount)
+    {
+        flashbangCount += amount;
+        flashNum.text = flashbangCount.ToString();
+        gasPotCount += amount;
+        gasNum.text = gasPotCount.ToString();
     }
 
     public static void SetHealthBarValue(float value)

@@ -2,41 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class FlashBomb : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class FireBall : MonoBehaviour
 {
-    public GameObject Bullet;
-    public float BulletForce = 5.0f;
-    public float destroyTime = 4f;
-    AudioSource myaudio;
 
-    [SerializeField] Health hScript;
-    [SerializeField] ItemSwitch item;
+    public GameObject Bullet;
+    public float BulletForce = 100.0f;
+    public float destroyTime = 3.0f;
+    AudioSource myaudio;
+    ParticleSystem particle;
+
+    public float coolDown = 0.05f;
+    public float nextFire = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        particle = GetComponent<ParticleSystem>();
         myaudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetMouseButtonDown(1)) && (Health.flashbangCount >= 1) && item.flash_inv.activeSelf)
+        if ((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetMouseButtonDown(0)) && (Time.time >= nextFire))
         {
 
+            //create a bullet instance
             GameObject currentBullet = Instantiate(Bullet, this.transform.position, this.transform.rotation) as GameObject;
-           
+
+            //fix scale
             currentBullet.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
+            //add force to shoot
             currentBullet.GetComponent<Rigidbody>().AddForce(transform.forward * BulletForce);
 
             myaudio.Play();
+            particle.Play();
 
+            nextFire = Time.time + coolDown;
+            //Destroy it after a certain time
             Destroy(currentBullet, destroyTime);
-
-            Health.flashbangCount -= 1;
-            hScript.flashNum.text = Health.flashbangCount.ToString();
         }
     }
+
 }

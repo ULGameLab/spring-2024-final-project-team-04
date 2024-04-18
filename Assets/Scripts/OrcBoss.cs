@@ -12,6 +12,9 @@ public class OrcBoss : MonoBehaviour
     //public AudioSource WalkSound;
     //public AudioSource TakeDmgSound;
     //public AudioSource DeathSound;
+    public int currencyOnDeath = 10; // Currency amount to add when the enemy dies
+    private CurrencyManager currencyManager;
+
     GameObject player;
     NavMeshAgent agent;
     public float chaseDistance = 50.0f;
@@ -52,6 +55,12 @@ public class OrcBoss : MonoBehaviour
         originSpeed = agent.speed;
         chaseSpeed = agent.speed * 1.5f;
         animator.speed = speedMultiplier;
+        // Find and cache a reference to the CurrencyManager
+        currencyManager = FindFirstObjectByType<CurrencyManager>();
+        if (currencyManager == null)
+        {
+            Debug.LogError("CurrencyManager not found in the scene.");
+        }
     }
 
     // Update is called once per frame
@@ -177,6 +186,10 @@ public class OrcBoss : MonoBehaviour
 
     void Die()
     {
+        if (currencyManager != null)
+        {
+            currencyManager.AddCurrency(currencyOnDeath);
+        }
         state = BossState.DEAD;
         animator.SetBool("Die", true);
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();

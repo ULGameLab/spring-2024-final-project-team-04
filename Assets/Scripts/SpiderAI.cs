@@ -23,6 +23,9 @@ public class SpiderAI : MonoBehaviour
     [SerializeField] EnemyHealthBar healthBar;
     //public GameObject[] foodPrefabs; // Array of your food prefabs
 
+    public int currencyOnDeath = 1; // Currency amount to add when the enemy dies
+    private CurrencyManager currencyManager;
+
 
     protected EnemyState state = EnemyState.DEFAULT;
     protected Vector3 destination = new Vector3(0, 0, 0);
@@ -41,6 +44,7 @@ public class SpiderAI : MonoBehaviour
     //bool effectStarted = false;
 
     public bool gloveDamage = false;
+    public bool fireDamage = false;
 
     //key stuff
     public int MaxCount;
@@ -65,6 +69,12 @@ public class SpiderAI : MonoBehaviour
         //deathEffect = transform.GetComponent<ParticleSystem>();
         timer = 0f;
         lastPosition = transform.position;
+        // Find and cache a reference to the CurrencyManager
+        currencyManager = FindFirstObjectByType<CurrencyManager>();
+        if (currencyManager == null)
+        {
+            Debug.LogError("CurrencyManager not found in the scene.");
+        }
     }
 
     private Vector3 RandomPosition()
@@ -239,6 +249,35 @@ public class SpiderAI : MonoBehaviour
             gloveDamage = true;
             StartCoroutine(ApplyDamage());
         }
+        else if (col.CompareTag("FlashAOE"))
+        {
+            StartCoroutine(FlashBang());
+        }
+        else if (col.CompareTag("FireAttack"))
+        {
+            health -= 10;
+            healthBar.UpdateHealthBar(health, maxHp);
+            animator.SetBool("takeDamage", true);
+            StartCoroutine(TurnDamageOff(1));
+            TakeDmgSound.Play();
+            // Disable all Renderers and Colliders
+            col.gameObject.SetActive(false);
+            if (health <= 0)
+            {
+                Die();
+            }
+            fireDamage = true;
+            Debug.Log("Fire Damage");
+            StartCoroutine(ApplyFireDamage());
+        }
+    }
+
+    private IEnumerator FlashBang()
+    {
+        agent.isStopped = true;
+        yield return new WaitForSeconds(5.0f);
+        agent.isStopped = false;
+        state = EnemyState.DEFAULT;
     }
 
     void OnTriggerExit(Collider other)
@@ -261,6 +300,23 @@ public class SpiderAI : MonoBehaviour
             i += 1.0f;
         }
     }
+    IEnumerator ApplyFireDamage()
+    {
+        float i = 0;
+        while (fireDamage && health > 0 && i <= 7.0f)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            TakeDamage(2);
+            healthBar.UpdateHealthBar(health, maxHp);
+            i += 1.0f;
+            if (i == 7.0f)
+            {
+                fireDamage = false;
+                Debug.Log("FireDamage = false");
+            }
+        }
+    }
 
     void TakeDamage(float amount)
     {
@@ -275,6 +331,10 @@ public class SpiderAI : MonoBehaviour
 
     void Die()
     {
+        if (currencyManager != null)
+        {
+            currencyManager.AddCurrency(currencyOnDeath);
+        }
         state = EnemyState.DEAD;
         animator.SetBool("dead", true);
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();

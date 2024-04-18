@@ -9,9 +9,12 @@ public class Shop : MonoBehaviour
     public GameObject shopMenu;
     public GameObject openShopMessage;
     public GameObject confirmPurchase;
+    public GameObject noMoneyMsg;
     public TextMeshProUGUI confirmMessage;
     public List<UnityEngine.Object> availableItems;
     public Transform spawnPoint;
+
+    private CurrencyManager currencyManager;
 
     private Transform playerTransform;
     private UnityEngine.Object selectedObject;
@@ -19,7 +22,11 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currencyManager = FindFirstObjectByType<CurrencyManager>();
+        if (currencyManager == null)
+        {
+            Debug.LogError("CurrencyManager not found in the scene.");
+        }
     }
 
     // Update is called once per frame
@@ -71,9 +78,21 @@ public class Shop : MonoBehaviour
     public void ConfirmPurchase()
     {
         confirmPurchase.SetActive(false);
-        shopMenu.SetActive(false);
-        Vector3 spawnPosition = playerTransform.position + playerTransform.forward;
-        Instantiate(selectedObject, spawnPosition, Quaternion.identity);
+        if (currencyManager != null && currencyManager.SpendCurrency(5))
+        {
+            shopMenu.SetActive(false);
+            Vector3 spawnPosition = playerTransform.position + playerTransform.forward;
+            Instantiate(selectedObject, spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            noMoneyMsg.SetActive(true);
+        }
+    }
+
+    public void Okay()
+    {
+        noMoneyMsg.SetActive(false);
     }
 
 }

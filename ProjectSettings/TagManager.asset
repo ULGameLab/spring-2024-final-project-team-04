@@ -28,6 +28,8 @@ TagManager:
   - Gas_Ground
   - GloveAttack
   - PlayerTrigger
+  - FlashAOE
+  - FireAttack
   layers:
   - Default
   - TransparentFX

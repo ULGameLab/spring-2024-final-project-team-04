@@ -11,6 +11,9 @@ public class StaffShooting : MonoBehaviour
     public float destroyTime = 3.0f;
     AudioSource myaudio;
     ParticleSystem particle;
+    
+    public float coolDown = 0.05f;
+    public float nextFire = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -44,4 +47,5 @@ public class StaffShooting : MonoBehaviour
             }
         }
     }
+
 }

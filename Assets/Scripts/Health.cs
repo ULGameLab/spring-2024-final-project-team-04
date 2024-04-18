@@ -17,13 +17,16 @@ public class Health : MonoBehaviour
     private float maxHealth = 100.0f;
     private float healVal = 10.0f;
     private static int healthPotCount = 0;
-    private static int shieldPotCount = 0;
-    public static int flashbangCount = 0;
+    private static int shieldPotCount = 5;
+    public static int flashbangCount = 5;
     public static int gasPotCount = 0;
+    public bool shieldOn = false;
     //key stuff
     public static int keyCount = 0;
     public static int bossKeyCount = 0;
     AudioSource potionDrink;
+
+    public float enemyDamage = 10f;
 
     public TextMeshProUGUI healthNum;
     public TextMeshProUGUI shieldNum;
@@ -44,6 +47,7 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        shieldOn = false;
         // Reset static variables when the scene starts
         keyCount = 0;
         bossKeyCount = 0;
@@ -157,8 +161,10 @@ public class Health : MonoBehaviour
                 break;
 
             case "EnemyAttack":
-                health -= 10;
-                Debug.Log("Enemy attack");
+                if (!shieldOn) {
+                    health -= enemyDamage;
+                    Debug.Log("Enemy attack");
+                }
                 break;
 
             case "key":
@@ -202,11 +208,13 @@ public class Health : MonoBehaviour
 
         private IEnumerator ShieldPotion()
     {
+        shieldOn = true;
         potionDrink.Play();
         Debug.Log("Shield Potion used");
         ShieldBuff.SetActive(true);
         yield return new WaitForSeconds(5.0f);
         ShieldBuff.SetActive(false);
+        shieldOn = false;
     }
     private IEnumerator SpeedPotion()
     {

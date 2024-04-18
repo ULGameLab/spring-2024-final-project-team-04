@@ -20,6 +20,9 @@ public class CrabBoss : MonoBehaviour
     public float currHealth;
     [SerializeField] EnemyHealthBar healthBar;
 
+    public int currencyOnDeath = 10; // Currency amount to add when the enemy dies
+    private CurrencyManager currencyManager;
+
 
     protected BossState state = BossState.DEFAULT;
     protected Vector3 destination = new Vector3(0, 0, 0);
@@ -50,6 +53,12 @@ public class CrabBoss : MonoBehaviour
         animator = GetComponent<Animator>();
         originSpeed = agent.speed;
         chaseSpeed = agent.speed * 1.5f;
+        // Find and cache a reference to the CurrencyManager
+        currencyManager = FindFirstObjectByType<CurrencyManager>();
+        if (currencyManager == null)
+        {
+            Debug.LogError("CurrencyManager not found in the scene.");
+        }
     }
 
     // Update is called once per frame
@@ -171,6 +180,10 @@ public class CrabBoss : MonoBehaviour
 
     void Die()
     {
+        if (currencyManager != null)
+        {
+            currencyManager.AddCurrency(currencyOnDeath);
+        }
         state = BossState.DEAD;
         animator.SetBool("Die", true);
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();

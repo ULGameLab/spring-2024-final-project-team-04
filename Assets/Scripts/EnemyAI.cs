@@ -22,6 +22,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] EnemyHealthBar healthBar;
     //public GameObject[] foodPrefabs; // Array of your food prefabs
 
+    public int currencyOnDeath = 1; // Currency amount to add when the enemy dies
+    private CurrencyManager currencyManager;
+
 
     protected EnemyState state = EnemyState.DEFAULT;
     protected Vector3 destination = new Vector3(0, 0, 0);
@@ -68,6 +71,12 @@ public class EnemyAI : MonoBehaviour
         //deathEffect = transform.GetComponent<ParticleSystem>();
         timer = 0f;
         lastPosition = transform.position;
+        // Find and cache a reference to the CurrencyManager
+        currencyManager = FindFirstObjectByType<CurrencyManager>();
+        if (currencyManager == null)
+        {
+            Debug.LogError("CurrencyManager not found in the scene.");
+        }
     }
 
     private Vector3 RandomPosition()
@@ -316,6 +325,10 @@ public class EnemyAI : MonoBehaviour
 
     void Die()
     {
+        if (currencyManager != null)
+        {
+            currencyManager.AddCurrency(currencyOnDeath);
+        }
         state = EnemyState.DEAD;
         animator.SetBool("dead", true);
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();

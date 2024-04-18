@@ -37,7 +37,7 @@ public class Shop : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.tag == "PlayerTrigger" && !shopMenu.activeSelf)
+        if (other.tag == "Player" && !shopMenu.activeSelf)
         {
             Debug.Log("Entered Shop.");
             openShopMessage.SetActive(true);
@@ -51,7 +51,7 @@ public class Shop : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.tag == "PlayerTrigger")
+        if (other.tag == "Player")
         {
             Debug.Log("Exited Shop.");
             openShopMessage.SetActive(false);

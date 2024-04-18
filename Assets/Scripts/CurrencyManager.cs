@@ -10,7 +10,7 @@ public class CurrencyManager : MonoBehaviour
     public TextMeshProUGUI currency;
 
     // Current currency amount
-    private int currencyAmount;
+    public int currencyAmount;
 
     void Start()
     {

@@ -10,6 +10,7 @@ public class CurrencyManager : MonoBehaviour
     public TextMeshProUGUI currency;
 
     // Current currency amount
+    [SerializeField] 
     private int currencyAmount;
 
     void Start()

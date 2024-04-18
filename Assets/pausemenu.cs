@@ -10,6 +10,7 @@ public class pausemenu : MonoBehaviour
     public GameObject Panel; 
     public static bool paused;
     [SerializeField] Health HOBJ;
+    [SerializeField] CurrencyManager CM;
 
     void Update()
     {
@@ -63,6 +64,16 @@ public class pausemenu : MonoBehaviour
 
     public void fullHeal() {
         HOBJ.SetHealth(100.0f);
+    }
+
+    public void getMoreMoney()
+    {
+        CM.AddCurrency(50);
+    }
+
+    public void slow_Enemies()
+    {
+   
     }
 
     public bool IsPaused()

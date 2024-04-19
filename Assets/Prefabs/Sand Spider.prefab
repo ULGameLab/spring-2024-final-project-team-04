@@ -12153,9 +12153,12 @@ MonoBehaviour:
   health: 50
   currHealth: 0
   healthBar: {fileID: 9008928147193068895}
+  currencyOnDeath: 1
   checkInterval: 1
   deathEffect: {fileID: 2944883433612543864}
   gloveDamage: 0
+  fireDamage: 0
+  fireEffect: {fileID: 100006, guid: ba1b9e2ea89c3ed46b0e18f4e6be1e1e, type: 3}
   MaxCount: 0
   key: {fileID: 8354032572056563003, guid: d9fefd7238302a842bad69733d656748, type: 3}
 --- !u!1 &5858353433909713668

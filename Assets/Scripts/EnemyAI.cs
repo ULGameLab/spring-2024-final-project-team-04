@@ -44,6 +44,7 @@ public class EnemyAI : MonoBehaviour
 
     public bool gloveDamage;
     public bool fireDamage;
+    public GameObject fireEffect;
 
     //key stuff
     public int MaxCount;
@@ -52,6 +53,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        fireEffect.SetActive(false);
         gloveDamage = false;
         fireDamage = false;
         //for keys
@@ -310,6 +312,7 @@ public class EnemyAI : MonoBehaviour
     }
     IEnumerator ApplyFireDamage()
     {
+        fireEffect.SetActive(true);
         float i = 0;
         while (fireDamage && health > 0 && i <= 7.0f)
         {
@@ -320,6 +323,7 @@ public class EnemyAI : MonoBehaviour
             i += 1.0f;
             if (i == 7.0f)
             {
+                fireEffect.SetActive(false);
                 fireDamage = false;
                 Debug.Log("FireDamage = false");
             }

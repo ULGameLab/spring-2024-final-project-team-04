@@ -45,6 +45,7 @@ public class SpiderAI : MonoBehaviour
 
     public bool gloveDamage = false;
     public bool fireDamage = false;
+    public GameObject fireEffect;
 
     //key stuff
     public int MaxCount;
@@ -52,7 +53,7 @@ public class SpiderAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        fireEffect.SetActive(false);
         currHealth = health;
         //for keys
         MaxCount = DungeonCreator.bugCount;
@@ -304,6 +305,7 @@ public class SpiderAI : MonoBehaviour
     }
     IEnumerator ApplyFireDamage()
     {
+        fireEffect.SetActive(true);
         float i = 0;
         while (fireDamage && health > 0 && i <= 7.0f)
         {
@@ -314,6 +316,7 @@ public class SpiderAI : MonoBehaviour
             i += 1.0f;
             if (i == 7.0f)
             {
+                fireEffect.SetActive(false);
                 fireDamage = false;
                 Debug.Log("FireDamage = false");
             }

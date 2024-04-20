@@ -8,6 +8,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class OrcBoss : MonoBehaviour
 {
+    //key stuff
+    public GameObject goldKey;
+
     //public AudioSource AttackSound;
     //public AudioSource WalkSound;
     //public AudioSource TakeDmgSound;
@@ -209,8 +212,32 @@ public class OrcBoss : MonoBehaviour
         }
         state = BossState.DEAD;
         animator.SetBool("Die", true);
+        StartCoroutine(spawnKey());
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
         foreach (Collider c in allColliders) c.enabled = false;
+        StartCoroutine(PlayAndDestroy(4.67f));
+    }
+
+    //golden key on death is droped
+    private IEnumerator spawnKey()
+    {
+
+        Instantiate(goldKey, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
+        yield return null;
+    }
+
+    private IEnumerator PlayAndDestroy(float waitTime)
+    {
+        //myaudio.Play();
+        //SpawnRandomFood(transform.position);
+        yield return new WaitForSeconds(waitTime);
+        //deathEffect.Play();
+        //DeathSound.Play();
+        yield return new WaitForSeconds(0.4f);
+        Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer c in allRenderers) c.enabled = false;
+        //StopBloodSplatter();
+        Destroy(gameObject);
     }
 
     private IEnumerator WaitForSpecial(float waitTime)

@@ -26,6 +26,7 @@ public class Health : MonoBehaviour
     //key stuff
     public static int keyCount = 0;
     public static int bossKeyCount = 0;
+    public static int WinCondition = 0;
     AudioSource potionDrink;
 
     public float enemyDamage = 10f;
@@ -54,6 +55,7 @@ public class Health : MonoBehaviour
         // Reset static variables when the scene starts
         keyCount = 0;
         bossKeyCount = 0;
+        WinCondition = 0;
         //
         potionDrink = GetComponent<AudioSource>();
 
@@ -145,7 +147,9 @@ public class Health : MonoBehaviour
         {
             health += 0.0625f;
         }
-
+        if (WinCondition == 3) {
+            SceneManager.LoadScene("GameOver");//change to win screen later!!!!
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -191,6 +195,7 @@ public class Health : MonoBehaviour
 
             case "Gold_key":
                 bossKeyCount++;
+                WinCondition++;
                 Debug.Log("Gold_key " + bossKeyCount);
                 break;
 

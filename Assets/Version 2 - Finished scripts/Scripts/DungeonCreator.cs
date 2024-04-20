@@ -38,7 +38,6 @@ public class DungeonCreator : MonoBehaviour
     // after a floor/ground for the room is made; decorated the room
     void decorateDungeon(Vector3 floorPosition, Vector3 floorSize)
     {
-        //change to be based off room size??????
         int numberOfDecorations = 10; 
 
         // place decorations

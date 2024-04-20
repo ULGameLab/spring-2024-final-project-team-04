@@ -20,9 +20,7 @@ public class Breakable : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        if (other.gameObject.CompareTag("Spider")) {
-            Destroy(gameObject);
-        }
+       
     }
 
     void OnCollisionEnter(Collision collision)

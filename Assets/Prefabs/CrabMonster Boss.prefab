@@ -945,10 +945,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.002
-  m_Height: 0.015
+  m_Radius: 0.0020427925
+  m_Height: 0.016299533
   m_Direction: 1
-  m_Center: {x: 0, y: -0.006, z: 0}
+  m_Center: {x: 0.000000034952652, y: -0.0053502354, z: 0.00004278119}
 --- !u!1 &1733148806652905867
 GameObject:
   m_ObjectHideFlags: 0
@@ -4183,9 +4183,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.002
-  m_Height: 0.015
+  m_Height: 0.016238013
   m_Direction: 1
-  m_Center: {x: 0.001, y: -0.006, z: 0}
+  m_Center: {x: 0.0009999821, y: -0.005380993, z: -0.000000010471344}
 --- !u!1 &8141006971939989388
 GameObject:
   m_ObjectHideFlags: 0
@@ -4398,7 +4398,10 @@ MonoBehaviour:
   health: 250
   currHealth: 0
   healthBar: {fileID: 0}
-  checkInterval: 1
+  currencyOnDeath: 10
+  EggsPrefab: {fileID: 6829807343835860100, guid: d2f91799a55884aca9892d79e9aad926, type: 3}
+  layPoint: {fileID: 8243233249627346572}
+  checkInterval: 10
   gloveDamage: 0
 --- !u!136 &1687462830419910718
 CapsuleCollider:

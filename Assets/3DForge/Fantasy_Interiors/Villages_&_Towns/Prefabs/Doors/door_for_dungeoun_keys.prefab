@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 633c2410da0cba549b65d3ffa938b50b, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: 633c2410da0cba549b65d3ffa938b50b, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -108,5 +112,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfbd50231715414d87c9160ce813f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfBosses: 3
   vineDoor: {fileID: 999665162909515100, guid: 06dffdb2701bb46498773ac8b34b9efa, type: 3}

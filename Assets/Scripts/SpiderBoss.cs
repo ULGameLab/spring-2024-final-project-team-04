@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum BossState { ATTACK, CHASE, DEFAULT, DEAD };
+public enum BossState { ATTACK, CHASE, DEFAULT, DEAD, SPECIAL };
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class SpiderBoss : MonoBehaviour
 {
+
+    //key stuff
+    public GameObject goldKey;
+
     //public AudioSource AttackSound;
     //public AudioSource WalkSound;
     //public AudioSource TakeDmgSound;
@@ -23,6 +27,10 @@ public class SpiderBoss : MonoBehaviour
     public int currencyOnDeath = 10; // Currency amount to add when the enemy dies
     private CurrencyManager currencyManager;
 
+    // spitting
+    public GameObject poisonProjectilePrefab;
+    public Transform spitPoint;
+    public float spitForce = 100f;
 
     protected BossState state = BossState.DEFAULT;
     protected Vector3 destination = new Vector3(0, 0, 0);
@@ -32,7 +40,7 @@ public class SpiderBoss : MonoBehaviour
     AudioSource myaudio;
 
     private Vector3 lastPosition;
-    public float checkInterval = 1f; // Interval to check if the agent is stuck
+    public float checkInterval = 5f;
     private float timer;
     //private float radius = 20f;
 
@@ -45,6 +53,7 @@ public class SpiderBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer = 0f;
         currHealth = health;
         player = GameObject.FindWithTag("Player");
         agent = this.GetComponent<NavMeshAgent>();
@@ -107,6 +116,19 @@ public class SpiderBoss : MonoBehaviour
                     animator.SetBool("Attacking", false);
                 }
                 break;
+            case BossState.SPECIAL:
+                direction = player.transform.position - transform.position;
+                direction.y = 0f;
+                // Rotate the enemy to face the player
+                if (direction != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10);
+                }
+                animator.SetBool("Walking", false);
+                animator.SetBool("Spit", true);
+                agent.isStopped = true;
+                break;
             case BossState.DEAD:
                 agent.isStopped = true;
                 break;
@@ -114,7 +136,16 @@ public class SpiderBoss : MonoBehaviour
                 break;
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        timer += Time.deltaTime;
+        if (timer >= checkInterval && Vector3.Distance(transform.position, player.transform.position) < 20 && state != BossState.DEAD)
+        {
+            Debug.Log("Special");
+            timer = -15f;
+            state = BossState.SPECIAL;
+            StartCoroutine(WaitForSpecial(4.5f));
+        }
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Spit") && state != BossState.DEAD)
         {
             agent.isStopped = false;
         }
@@ -189,8 +220,49 @@ public class SpiderBoss : MonoBehaviour
         }
         state = BossState.DEAD;
         animator.SetBool("Die", true);
+        StartCoroutine(spawnKey());
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
         foreach (Collider c in allColliders) c.enabled = false;
+        StartCoroutine(PlayAndDestroy(4.67f));
+    }
+
+    //golden key on death is droped
+    private IEnumerator spawnKey()
+    {
+
+        Instantiate(goldKey, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
+        yield return null;
+    }
+
+    private IEnumerator PlayAndDestroy(float waitTime)
+    {
+        //myaudio.Play();
+        //SpawnRandomFood(transform.position);
+        yield return new WaitForSeconds(waitTime);
+        //deathEffect.Play();
+        //DeathSound.Play();
+        yield return new WaitForSeconds(0.4f);
+        Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer c in allRenderers) c.enabled = false;
+        //StopBloodSplatter();
+        Destroy(gameObject);
+    }
+
+    void SpitPoison()
+    {
+        GameObject poisonProjectile = Instantiate(poisonProjectilePrefab, spitPoint.position, Quaternion.identity);
+        Rigidbody rb = poisonProjectile.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = (player.transform.position - spitPoint.position).normalized * spitForce;
+        }
+    }
+
+    private IEnumerator WaitForSpecial(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("Spit", false);
+        state = BossState.DEFAULT;
     }
 
     //private IEnumerator TurnDamageOff(float waitTime)

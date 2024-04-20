@@ -8,6 +8,10 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class CrabBoss : MonoBehaviour
 {
+
+    //key stuff
+    public GameObject goldKey;
+
     //public AudioSource AttackSound;
     //public AudioSource WalkSound;
     //public AudioSource TakeDmgSound;
@@ -23,6 +27,9 @@ public class CrabBoss : MonoBehaviour
     public int currencyOnDeath = 10; // Currency amount to add when the enemy dies
     private CurrencyManager currencyManager;
 
+    // Egg laying
+    public GameObject EggsPrefab;
+    public Transform layPoint;
 
     protected BossState state = BossState.DEFAULT;
     protected Vector3 destination = new Vector3(0, 0, 0);
@@ -32,7 +39,7 @@ public class CrabBoss : MonoBehaviour
     AudioSource myaudio;
 
     private Vector3 lastPosition;
-    public float checkInterval = 1f; // Interval to check if the agent is stuck
+    public float checkInterval = 5f;
     private float timer;
     //private float radius = 20f;
 
@@ -45,6 +52,7 @@ public class CrabBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer = 0f;
         currHealth = health;
         player = GameObject.FindWithTag("Player");
         agent = this.GetComponent<NavMeshAgent>();
@@ -67,7 +75,7 @@ public class CrabBoss : MonoBehaviour
         switch (state)
         {
             case BossState.DEFAULT:
-                animator.SetBool("Walking", false);
+                //animator.SetBool("Walking", false);
                 if (Vector3.Distance(transform.position, player.transform.position) < chaseDistance)
                 {
                     state = BossState.CHASE;
@@ -104,6 +112,13 @@ public class CrabBoss : MonoBehaviour
                     animator.SetBool("Attacking", false);
                 }
                 break;
+            case BossState.SPECIAL:
+                animator.SetBool("Attacking", false);
+                animator.SetBool("Walking", false);
+                agent.SetDestination(transform.position);
+                agent.isStopped = true;
+                animator.SetBool("LayEggs", true);
+                break;
             case BossState.DEAD:
                 agent.isStopped = true;
                 break;
@@ -111,9 +126,17 @@ public class CrabBoss : MonoBehaviour
                 break;
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && state != BossState.DEAD)
         {
             agent.isStopped = false;
+        }
+
+        timer += Time.deltaTime;
+        if (timer >= checkInterval && state != BossState.DEAD)
+        {
+            timer = -15f;
+            state = BossState.SPECIAL;
+            StartCoroutine(WaitForSpecial(3.33f));
         }
     }
 
@@ -186,14 +209,46 @@ public class CrabBoss : MonoBehaviour
         }
         state = BossState.DEAD;
         animator.SetBool("Die", true);
+        StartCoroutine(spawnKey());
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
         foreach (Collider c in allColliders) c.enabled = false;
+        StartCoroutine(PlayAndDestroy(4.67f));
     }
 
-    //private IEnumerator TurnDamageOff(float waitTime)
-    //{
-    //    yield return new WaitForSeconds(waitTime);
-    //    animator.SetBool("takeDamage", false);
-    //}
+    //golden key on death is droped
+    private IEnumerator spawnKey()
+    {
+
+        Instantiate(goldKey, transform.position + new Vector3(0f, 0.8f, 0.0f), Quaternion.Euler(270f, 0f, 0f));
+        yield return null;
+    }
+
+    private IEnumerator PlayAndDestroy(float waitTime)
+    {
+        //myaudio.Play();
+        //SpawnRandomFood(transform.position);
+        yield return new WaitForSeconds(waitTime);
+        //deathEffect.Play();
+        //DeathSound.Play();
+        yield return new WaitForSeconds(0.4f);
+        Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer c in allRenderers) c.enabled = false;
+        //StopBloodSplatter();
+        Destroy(gameObject);
+    }
+
+
+
+    void LayEggs()
+    {
+        Instantiate(EggsPrefab, layPoint.position, Quaternion.identity);
+    }
+
+    private IEnumerator WaitForSpecial(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("LayEggs", false);
+        state = BossState.DEFAULT;
+    }
 
 }

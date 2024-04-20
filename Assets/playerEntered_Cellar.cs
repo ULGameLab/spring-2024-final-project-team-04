@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class playerEntered_Cellar : MonoBehaviour
+{ 
+    private bool activated = false;
+    public GameObject Boss;
+    public GameObject lights;
+
+    void activateScripts()
+    {
+        Boss.SetActive(true);
+        lights.SetActive(true);
+        //avoid errors when pots are destroyed
+        activated = true;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!activated && collision.gameObject.CompareTag("Player"))
+        {
+            activateScripts();
+        }
+    }
+}
+
+

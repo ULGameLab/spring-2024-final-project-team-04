@@ -8,6 +8,8 @@ public class PlayerEnterDiningHall : MonoBehaviour
     public GameObject pot1;
     public GameObject pot2;
     private bool activated = false;
+    public GameObject Boss;
+    public GameObject lights;
 
     void Start() { 
         pot1.GetComponent<EnemySpawnerPot>().enabled = false;
@@ -18,7 +20,9 @@ public class PlayerEnterDiningHall : MonoBehaviour
     {
         pot1.GetComponent<EnemySpawnerPot>().enabled = true;
         pot2.GetComponent<EnemySpawnerPot>().enabled = true;
-       //avoid errors when pots are destroyed
+        Boss.SetActive(true);
+        lights.SetActive(true);
+        //avoid errors when pots are destroyed
         activated = true;
     }
 

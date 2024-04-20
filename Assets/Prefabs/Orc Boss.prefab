@@ -9011,13 +9011,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5ab9f546d2146fb8a555147a1631bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currencyOnDeath: 10
   chaseDistance: 50
   maxHp: 250
   health: 250
   currHealth: 0
   healthBar: {fileID: 0}
   speedMultiplier: 3
-  checkInterval: 1
+  checkInterval: 10
   gloveDamage: 0
 --- !u!136 &7409122354571344804
 CapsuleCollider:

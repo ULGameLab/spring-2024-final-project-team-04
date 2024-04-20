@@ -29,6 +29,7 @@ public class Health : MonoBehaviour
     AudioSource potionDrink;
 
     public float enemyDamage = 10f;
+    public float spawnDamage = 2f;
 
     public TextMeshProUGUI healthNum;
     public TextMeshProUGUI shieldNum;
@@ -173,6 +174,13 @@ public class Health : MonoBehaviour
                 if (!shieldOn) {
                     health -= enemyDamage;
                     Debug.Log("Enemy attack");
+                }
+                break;
+            case "SpawnAttack":
+                if (!shieldOn)
+                {
+                    health -= spawnDamage;
+                    Debug.Log("Spawn attack");
                 }
                 break;
 

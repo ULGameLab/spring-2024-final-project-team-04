@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6829807343835860100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6257887927972456375}
+  m_Layer: 0
+  m_Name: Eggs 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6257887927972456375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6829807343835860100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.6932197, y: 1.3803569, z: -0.2962201}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7184285624331922473}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8831304139682283814
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6257887927972456375}
+    m_Modifications:
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.10678029
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0703568
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.11378
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5372441
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5372442
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.45974854
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.4597486
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057075841198516187, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_Name
+      value: Eggs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057075841198516187, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+--- !u!4 &7184285624331922473 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1818519549650988303, guid: f21aebd56e987465f9d849ab0024bf8b, type: 3}
+  m_PrefabInstance: {fileID: 8831304139682283814}
+  m_PrefabAsset: {fileID: 0}

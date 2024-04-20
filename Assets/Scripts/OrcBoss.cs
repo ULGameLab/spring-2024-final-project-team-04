@@ -33,7 +33,7 @@ public class OrcBoss : MonoBehaviour
     AudioSource myaudio;
 
     private Vector3 lastPosition;
-    public float checkInterval = 1f; // Interval to check if the agent is stuck
+    public float checkInterval = 10f;
     private float timer;
     //private float radius = 20f;
 
@@ -46,6 +46,7 @@ public class OrcBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timer = 0f;
         currHealth = health;
         player = GameObject.FindWithTag("Player");
         agent = this.GetComponent<NavMeshAgent>();
@@ -53,7 +54,7 @@ public class OrcBoss : MonoBehaviour
         healthBar.UpdateHealthBar(health, maxHp);
         animator = GetComponent<Animator>();
         originSpeed = agent.speed;
-        chaseSpeed = agent.speed * 1.5f;
+        chaseSpeed = agent.speed * 2f;
         animator.speed = speedMultiplier;
         // Find and cache a reference to the CurrencyManager
         currencyManager = FindFirstObjectByType<CurrencyManager>();
@@ -110,6 +111,14 @@ public class OrcBoss : MonoBehaviour
                     animator.SetBool("Attacking", false);
                 }
                 break;
+            case BossState.SPECIAL:
+                animator.SetBool("Spin", true);
+                animator.SetBool("Walking", false);
+                animator.SetBool("Attacking", false);
+                agent.isStopped = false;
+                agent.SetDestination(player.transform.position);
+                agent.speed = chaseSpeed;
+                break;
             case BossState.DEAD:
                 agent.isStopped = true;
                 break;
@@ -117,9 +126,17 @@ public class OrcBoss : MonoBehaviour
                 break;
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && state != BossState.DEAD)
         {
             agent.isStopped = false;
+        }
+
+        timer += Time.deltaTime;
+        if (timer >= checkInterval && state != BossState.DEAD && Vector3.Distance(transform.position, player.transform.position) < 15)
+        {
+            timer = -15f;
+            state = BossState.SPECIAL;
+            StartCoroutine(WaitForSpecial(5));
         }
     }
 
@@ -196,10 +213,12 @@ public class OrcBoss : MonoBehaviour
         foreach (Collider c in allColliders) c.enabled = false;
     }
 
-    //private IEnumerator TurnDamageOff(float waitTime)
-    //{
-    //    yield return new WaitForSeconds(waitTime);
-    //    animator.SetBool("takeDamage", false);
-    //}
+    private IEnumerator WaitForSpecial(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        animator.SetBool("Spin", false);
+        state = BossState.DEFAULT;
+        agent.speed = originSpeed;
+    }
 
 }

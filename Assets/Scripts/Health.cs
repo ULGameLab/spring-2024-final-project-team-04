@@ -57,6 +57,7 @@ public class Health : MonoBehaviour
         bossKeyCount = 0;
         WinCondition = 0;
         //
+
         potionDrink = GetComponent<AudioSource>();
 
         if (HealthBar != null)
@@ -70,7 +71,6 @@ public class Health : MonoBehaviour
         shieldNum.text = shieldPotCount.ToString();
         flashNum.text = flashbangCount.ToString();
         gasNum.text = gasPotCount.ToString();
-
 
     }
     //for cheats 

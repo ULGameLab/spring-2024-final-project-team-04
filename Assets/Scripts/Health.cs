@@ -116,6 +116,10 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Backspace))
+        {
+            health = 0;
+        }
        
         SetHealthBarValue(health / maxHealth);
 

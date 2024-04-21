@@ -12,7 +12,7 @@ public class EnemyHealthBar : MonoBehaviour
     public void UpdateHealthBar(float currentValue, float maxValue)
     {
         slider.value = currentValue / maxValue;
-
+        cam = FindFirstObjectByType<Camera>();
     }
 
     // Update is called once per frame

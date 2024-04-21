@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 //public enum BossState { ATTACK, CHASE, DEFAULT, DEAD };
 
@@ -19,10 +20,12 @@ public class CrabSpawn : MonoBehaviour
     public float health = 30;
     public float currHealth;
     [SerializeField] EnemyHealthBar healthBar;
+    [SerializeField] Canvas HpBar;
 
     public int currencyOnDeath = 0; // Currency amount to add when the enemy dies
     private CurrencyManager currencyManager;
 
+    private bool isSinking = false;
 
     protected BossState state = BossState.DEFAULT;
     protected Vector3 destination = new Vector3(0, 0, 0);
@@ -49,6 +52,7 @@ public class CrabSpawn : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         agent = this.GetComponent<NavMeshAgent>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
+        HpBar = GetComponentInChildren<Canvas>();
         healthBar.UpdateHealthBar(health, maxHp);
         animator = GetComponent<Animator>();
         originSpeed = agent.speed;
@@ -106,15 +110,24 @@ public class CrabSpawn : MonoBehaviour
                 }
                 break;
             case BossState.DEAD:
-                agent.isStopped = true;
                 break;
             default:
                 break;
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && state != BossState.DEAD)
         {
             agent.isStopped = false;
+        }
+
+        if (isSinking)
+        {
+            transform.Translate(Vector3.down * .5f * Time.deltaTime);
+
+            if (transform.position.y < -2)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -186,15 +199,18 @@ public class CrabSpawn : MonoBehaviour
             currencyManager.AddCurrency(currencyOnDeath);
         }
         state = BossState.DEAD;
+        HpBar.gameObject.SetActive(false);
         animator.SetBool("Die", true);
         Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
         foreach (Collider c in allColliders) c.enabled = false;
+        agent.enabled = false;
+        StartCoroutine(Sink());
     }
 
-    //private IEnumerator TurnDamageOff(float waitTime)
-    //{
-    //    yield return new WaitForSeconds(waitTime);
-    //    animator.SetBool("takeDamage", false);
-    //}
+    private IEnumerator Sink()
+    {
+        yield return new WaitForSeconds(1);
+        isSinking = true;
+    }
 
 }

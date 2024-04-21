@@ -12,9 +12,10 @@ public class playerEntered_Storage : MonoBehaviour
     {
         Boss.SetActive(true);
         lights.SetActive(true);
-        //avoid errors when pots are destroyed
+        //
         activated = true;
     }
+
 
     void OnCollisionEnter(Collision collision)
     {

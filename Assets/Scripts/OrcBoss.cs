@@ -60,7 +60,7 @@ public class OrcBoss : MonoBehaviour
         healthBar.UpdateHealthBar(health, maxHp);
         animator = GetComponent<Animator>();
         originSpeed = agent.speed;
-        chaseSpeed = agent.speed * 2f;
+        chaseSpeed = agent.speed * 3f;
         animator.speed = speedMultiplier;
         // Find and cache a reference to the CurrencyManager
         currencyManager = FindFirstObjectByType<CurrencyManager>();

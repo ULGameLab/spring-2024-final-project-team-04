@@ -5,11 +5,17 @@ using UnityEngine;
 public class Breakable : MonoBehaviour
 {
     int hitsTaken = 0;
+    AudioSource myaudio;
+
+    void Start() {
+        myaudio = GetComponent<AudioSource>();
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Attack"))
         {
             hitsTaken++;
+            myaudio.Play();
         }
         if (hitsTaken >= 3)
         {
@@ -27,6 +33,7 @@ public class Breakable : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Attack")) {
             hitsTaken++;
+            myaudio.Play();
         }
         if (hitsTaken >= 3)
         {

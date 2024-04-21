@@ -17,6 +17,7 @@ public class portal_to_dungeun : MonoBehaviour
         {
             Health.bossKeyCount--;
             collision.transform.position = playerSP.transform.position + new Vector3(0f, 0.8f, 0.0f);
+            gameObject.transform.parent.gameObject.SetActive(false);
         }
     }
 }

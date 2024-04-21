@@ -214,7 +214,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && state != EnemyState.DEAD)
         {
             agent.isStopped = false;
         }

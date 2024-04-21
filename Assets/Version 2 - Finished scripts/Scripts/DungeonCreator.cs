@@ -261,7 +261,7 @@ public class DungeonCreator : MonoBehaviour
                 }
 
                 //randomly add decoration 
-                int randomNumber = UnityEngine.Random.Range(0, 290);
+                int randomNumber = UnityEngine.Random.Range(0, 250);
                 if (randomNumber == 20)
                 {
                     spawnBugs(floorTile.transform.position);

@@ -119,13 +119,13 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.9308176, g: 0.75102663, b: 0.4127209, a: 1}
-  m_Intensity: 1
-  m_Range: 15
+  m_Intensity: 2
+  m_Range: 18
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.8
@@ -158,7 +158,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -187,15 +187,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.5
+      value: -14.900002
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.14
+      value: 5.1499987
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.699997
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -207,11 +207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -7.7782867e-32
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 3.558929e-24
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

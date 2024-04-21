@@ -41,7 +41,7 @@ public class Shop : MonoBehaviour
         {
             Debug.Log("Entered Shop.");
             openShopMessage.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKey(KeyCode.Tab))
             {
                 openShopMessage.SetActive(false);
                 shopMenu.SetActive(true);

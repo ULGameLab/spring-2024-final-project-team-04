@@ -124,7 +124,7 @@ public class CrabSpawn : MonoBehaviour
         {
             transform.Translate(Vector3.down * .5f * Time.deltaTime);
 
-            if (transform.position.y < -2)
+            if (transform.position.y < -1)
             {
                 Destroy(gameObject);
             }

@@ -12,6 +12,9 @@ public class CrabBoss : MonoBehaviour
     //key stuff
     public GameObject goldKey;
 
+    // Immunity
+    private CrabSpawn support;
+
     //public AudioSource AttackSound;
     //public AudioSource WalkSound;
     //public AudioSource TakeDmgSound;
@@ -72,6 +75,7 @@ public class CrabBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        support = FindFirstObjectByType<CrabSpawn>();
         switch (state)
         {
             case BossState.DEFAULT:
@@ -82,6 +86,7 @@ public class CrabBoss : MonoBehaviour
                 }
                 break;
             case BossState.CHASE:
+                agent.isStopped = false;
                 if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance)
                 {
                     state = BossState.DEFAULT;
@@ -126,10 +131,10 @@ public class CrabBoss : MonoBehaviour
                 break;
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && state != BossState.DEAD)
-        {
-            agent.isStopped = false;
-        }
+        //if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && state != BossState.DEAD)
+        //{
+        //    agent.isStopped = false;
+        //}
 
         timer += Time.deltaTime;
         if (timer >= checkInterval && state != BossState.DEAD)
@@ -142,30 +147,23 @@ public class CrabBoss : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Attack"))
+        if (support == null)
         {
-            health -= 10;
-            healthBar.UpdateHealthBar(health, maxHp);
-            //animator.SetBool("takeDamage", true);
-            //StartCoroutine(TurnDamageOff(1));
-            //TakeDmgSound.Play();
-            // Disable all Renderers and Colliders
-            col.gameObject.SetActive(false);
-            if (health <= 0)
+            if (col.gameObject.CompareTag("Attack"))
             {
-                Die();
+                health -= 10;
+                healthBar.UpdateHealthBar(health, maxHp);
+                col.gameObject.SetActive(false);
+                if (health <= 0)
+                {
+                    Die();
+                }
             }
-            //Renderer[] allRenderers = gameObject.GetComponentsInChildren<Renderer>();
-            //foreach (Renderer c in allRenderers) c.enabled = false;
-            //Collider[] allColliders = gameObject.GetComponentsInChildren<Collider>();
-            //foreach (Collider c in allColliders) c.enabled = false;
-            //gameObject.GetComponent<ParticleSystemRenderer>().enabled = true;
-            //StartCoroutine(PlayAndDestroy(myaudio.clip.length));
-        }
-        else if (col.CompareTag("GloveAttack") || col.CompareTag("GasArea"))
-        {
-            gloveDamage = true;
-            StartCoroutine(ApplyDamage());
+            else if (col.CompareTag("GloveAttack") || col.CompareTag("GasArea"))
+            {
+                gloveDamage = true;
+                StartCoroutine(ApplyDamage());
+            }
         }
     }
 
@@ -248,7 +246,10 @@ public class CrabBoss : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         animator.SetBool("LayEggs", false);
-        state = BossState.DEFAULT;
+        if (state != BossState.DEAD)
+        {
+            state = BossState.DEFAULT;
+        }
     }
 
 }

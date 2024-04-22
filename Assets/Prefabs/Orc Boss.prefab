@@ -8928,7 +8928,7 @@ GameObject:
   - component: {fileID: 7409122354571344804}
   m_Layer: 0
   m_Name: Orc Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9011,16 +9011,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5ab9f546d2146fb8a555147a1631bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldKey: {fileID: 0}
+  goldKey: {fileID: 7447022692855013307, guid: 6b07ab31d47036645833e234477aa56f, type: 3}
   currencyOnDeath: 10
   chaseDistance: 50
   maxHp: 250
   health: 250
   currHealth: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 4270876353206701663}
   speedMultiplier: 3
   checkInterval: 10
-  fireEffect: {fileID: 0}
+  fireEffect: {fileID: 100006, guid: ba1b9e2ea89c3ed46b0e18f4e6be1e1e, type: 3}
   gloveDamage: 0
   fireDamage: 0
 --- !u!136 &7409122354571344804
@@ -18021,6 +18021,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3795907373647732279}
     m_Modifications:
+    - target: {fileID: 978593668876590456, guid: 47b1999face9d4a8dbeefdc72097abfe, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 2509043252961724537, guid: 47b1999face9d4a8dbeefdc72097abfe, type: 3}
       propertyPath: m_text
       value: Berserk Orc
@@ -18236,6 +18240,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
+--- !u!114 &4270876353206701663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7472416193380624867, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
+  m_PrefabInstance: {fileID: 6698657518879795132}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e79bdb04153c4682959705c0646c293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8759859429752423401 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2695171524866581589, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}

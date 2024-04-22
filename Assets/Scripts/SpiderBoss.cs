@@ -89,6 +89,7 @@ public class SpiderBoss : MonoBehaviour
                 }
                 break;
             case BossState.CHASE:
+                agent.isStopped = false;
                 if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance)
                 {
                     state = BossState.DEFAULT;
@@ -148,10 +149,10 @@ public class SpiderBoss : MonoBehaviour
             StartCoroutine(WaitForSpecial(4.5f));
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Spit") && state != BossState.DEAD)
-        {
-            agent.isStopped = false;
-        }
+        //if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Spit") && state != BossState.DEAD)
+        //{
+        //    agent.isStopped = false;
+        //}
     }
 
     void OnTriggerEnter(Collider col)
@@ -316,7 +317,10 @@ public class SpiderBoss : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         animator.SetBool("Spit", false);
-        state = BossState.DEFAULT;
+        if (state != BossState.DEAD)
+        {
+            state = BossState.DEFAULT;
+        }
     }
 
     //private IEnumerator TurnDamageOff(float waitTime)

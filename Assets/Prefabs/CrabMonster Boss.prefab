@@ -945,7 +945,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0020427925
+  m_Radius: 0.003
   m_Height: 0.016299533
   m_Direction: 1
   m_Center: {x: 0.000000034952652, y: -0.0053502354, z: 0.00004278119}
@@ -4182,7 +4182,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.002
+  m_Radius: 0.003
   m_Height: 0.016238013
   m_Direction: 1
   m_Center: {x: 0.0009999821, y: -0.005380993, z: -0.000000010471344}
@@ -4299,7 +4299,7 @@ GameObject:
   - component: {fileID: 3789638123416905849}
   m_Layer: 0
   m_Name: CrabMonster Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4373,7 +4373,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 4.5
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -4393,15 +4393,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897ffb4f51c984a0c86eec7f6c736982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goldKey: {fileID: 7447022692855013307, guid: 6b07ab31d47036645833e234477aa56f, type: 3}
   chaseDistance: 50
   maxHp: 250
   health: 250
   currHealth: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 5534001568692242612}
   currencyOnDeath: 10
   EggsPrefab: {fileID: 6829807343835860100, guid: d2f91799a55884aca9892d79e9aad926, type: 3}
   layPoint: {fileID: 8243233249627346572}
-  checkInterval: 10
+  checkInterval: 5
   gloveDamage: 0
 --- !u!136 &1687462830419910718
 CapsuleCollider:
@@ -4942,6 +4943,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2695171524866581589, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
   m_PrefabInstance: {fileID: 3134474506208223575}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5534001568692242612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7472416193380624867, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
+  m_PrefabInstance: {fileID: 3134474506208223575}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e79bdb04153c4682959705c0646c293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4600365362669689388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4950,6 +4962,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1636804772562807243}
     m_Modifications:
+    - target: {fileID: 978593668876590456, guid: 47b1999face9d4a8dbeefdc72097abfe, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 2509043252961724537, guid: 47b1999face9d4a8dbeefdc72097abfe, type: 3}
       propertyPath: m_text
       value: Mutant Crab

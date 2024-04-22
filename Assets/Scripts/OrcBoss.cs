@@ -87,6 +87,7 @@ public class OrcBoss : MonoBehaviour
                 }
                 break;
             case BossState.CHASE:
+                agent.isStopped = false;
                 if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance)
                 {
                     state = BossState.DEFAULT;
@@ -132,10 +133,10 @@ public class OrcBoss : MonoBehaviour
                 break;
         }
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && state != BossState.DEAD)
-        {
-            agent.isStopped = false;
-        }
+        //if (!animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && state != BossState.DEAD)
+        //{
+        //    agent.isStopped = false;
+        //}
 
         timer += Time.deltaTime;
         if (timer >= checkInterval && state != BossState.DEAD && Vector3.Distance(transform.position, player.transform.position) < 15)
@@ -298,7 +299,10 @@ public class OrcBoss : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         animator.SetBool("Spin", false);
-        state = BossState.DEFAULT;
+        if (state != BossState.DEAD)
+        {
+            state = BossState.DEFAULT;
+        }
         agent.speed = originSpeed;
     }
 

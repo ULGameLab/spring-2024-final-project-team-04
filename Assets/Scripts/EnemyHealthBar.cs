@@ -8,11 +8,18 @@ public class EnemyHealthBar : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private Camera cam;
     //[SerializeField] private Transform target;
- 
+
+    private void Start()
+    {
+        if (!CompareTag("Boss"))
+        {
+            cam = FindFirstObjectByType<Camera>();
+        }
+    }
+
     public void UpdateHealthBar(float currentValue, float maxValue)
     {
         slider.value = currentValue / maxValue;
-        cam = FindFirstObjectByType<Camera>();
     }
 
     // Update is called once per frame

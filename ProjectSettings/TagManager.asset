@@ -32,6 +32,7 @@ TagManager:
   - FireAttack
   - Ground
   - SpawnAttack
+  - Boss
   layers:
   - Default
   - TransparentFX

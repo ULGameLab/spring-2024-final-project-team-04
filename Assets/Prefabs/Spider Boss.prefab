@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 2269643511587841053}
   m_Layer: 0
   m_Name: Spider Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -574,18 +574,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82385cd45b32b4f91a94594cd05c4eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldKey: {fileID: 0}
+  goldKey: {fileID: 7447022692855013307, guid: 6b07ab31d47036645833e234477aa56f, type: 3}
   chaseDistance: 50
   maxHp: 250
   health: 250
   currHealth: 0
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 5857876573262195190}
   currencyOnDeath: 10
   poisonProjectilePrefab: {fileID: 3912821038511895218, guid: cb592c3fb527841b9bd9cb8bd76e12a3, type: 3}
   spitPoint: {fileID: 616110266562262951}
   spitForce: 40
-  checkInterval: 1
-  fireEffect: {fileID: 0}
+  checkInterval: 5
+  fireEffect: {fileID: 100006, guid: ba1b9e2ea89c3ed46b0e18f4e6be1e1e, type: 3}
   gloveDamage: 0
   fireDamage: 0
 --- !u!65 &2269643511587841053
@@ -1686,6 +1686,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 4.6799927
       objectReference: {fileID: 0}
+    - target: {fileID: 8571365250325340919, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 9109837909609392713, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
       propertyPath: m_Name
       value: BossHpBar
@@ -1711,3 +1715,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2695171524866581589, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
   m_PrefabInstance: {fileID: 3960917362813960213}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5857876573262195190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7472416193380624867, guid: 82c54b84da14b4a34976d9a01267b2d5, type: 3}
+  m_PrefabInstance: {fileID: 3960917362813960213}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e79bdb04153c4682959705c0646c293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

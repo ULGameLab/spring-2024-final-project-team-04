@@ -33,6 +33,7 @@ TagManager:
   - Ground
   - SpawnAttack
   - Boss
+  - SpitAttack
   layers:
   - Default
   - TransparentFX

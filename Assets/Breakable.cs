@@ -12,14 +12,14 @@ public class Breakable : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Attack") || other.gameObject.CompareTag("EnemyAttack"))
+        if (other.gameObject.CompareTag("Attack") || other.gameObject.CompareTag("SpitAttack"))
         {
             hitsTaken++;
             myaudio.Play();
         }
         if (hitsTaken >= 3)
         {
-            if ((other.gameObject.CompareTag("Decor") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Attack") || other.gameObject.CompareTag("EnemyAttack"))
+            if ((other.gameObject.CompareTag("Decor") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Attack") || other.gameObject.CompareTag("SpitAttack"))
             && hitsTaken == 3)
             {
                 //Debug.Log("Trigger 1" + gameObject);

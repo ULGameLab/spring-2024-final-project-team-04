@@ -191,6 +191,13 @@ public class Health : MonoBehaviour
                     Debug.Log("Spawn attack");
                 }
                 break;
+            case "SpitAttack":
+                if (!shieldOn)
+                {
+                    health -= enemyDamage;
+                    Debug.Log("Spit attack");
+                }
+                break;
 
             case "key":
                 keyCount++;

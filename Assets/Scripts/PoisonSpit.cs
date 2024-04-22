@@ -27,7 +27,7 @@ public class PoisonSpit : MonoBehaviour
             Instantiate(poisonPool, position, Quaternion.identity);
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Wall"))
+        else if (other.CompareTag("Wall") || other.CompareTag("Decor"))
         {
             Destroy(gameObject);
         }

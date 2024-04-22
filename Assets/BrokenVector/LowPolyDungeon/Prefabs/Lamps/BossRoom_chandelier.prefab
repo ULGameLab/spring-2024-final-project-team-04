@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 18
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6051760254346865604
 Transform:
@@ -120,7 +120,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.9308176, g: 0.75102663, b: 0.4127209, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -158,7 +158,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -187,19 +187,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 18
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.66
+      value: 7.65
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -215,7 +215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 2.3883566e-16
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6b596b44345a31449b0a45c5c08932c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

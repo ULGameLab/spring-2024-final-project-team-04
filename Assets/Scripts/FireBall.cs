@@ -9,7 +9,7 @@ public class FireBall : MonoBehaviour
     public GameObject Bullet;
     public float BulletForce = 100.0f;
     public float destroyTime = 3.0f;
-    AudioSource myaudio;
+    //AudioSource myaudio;
     ParticleSystem particle;
 
     public float coolDown = 0.05f;
@@ -19,7 +19,7 @@ public class FireBall : MonoBehaviour
     void Start()
     {
         particle = GetComponent<ParticleSystem>();
-        myaudio = GetComponent<AudioSource>();
+        //myaudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class FireBall : MonoBehaviour
             //add force to shoot
             currentBullet.GetComponent<Rigidbody>().AddForce(transform.forward * BulletForce);
 
-            myaudio.Play();
+            //myaudio.Play();
             particle.Play();
 
             nextFire = Time.time + coolDown;

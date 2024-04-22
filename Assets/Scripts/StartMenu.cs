@@ -40,7 +40,11 @@ public class StartMenu : MonoBehaviour
         SceneManager.LoadScene("StartScreen");
     }
 
-
+    public void CreditsButton()
+    {
+        Debug.Log("Credits");
+        SceneManager.LoadScene("Credits");
+    }
 
 
 }

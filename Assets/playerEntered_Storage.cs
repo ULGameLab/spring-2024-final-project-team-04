@@ -17,11 +17,12 @@ public class playerEntered_Storage : MonoBehaviour
     }
 
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (!activated && collision.gameObject.CompareTag("Player"))
+        if (!activated && other.gameObject.CompareTag("Player"))
         {
             activateScripts();
+            gameObject.SetActive(false);
         }
     }
 }

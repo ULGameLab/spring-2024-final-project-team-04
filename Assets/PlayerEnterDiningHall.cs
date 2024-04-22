@@ -9,7 +9,6 @@ public class PlayerEnterDiningHall : MonoBehaviour
     public GameObject pot2;
     private bool activated = false;
     public GameObject Boss;
-    public GameObject lights;
 
     void Start() { 
         pot1.GetComponent<EnemySpawnerPot>().enabled = false;
@@ -21,16 +20,16 @@ public class PlayerEnterDiningHall : MonoBehaviour
         pot1.GetComponent<EnemySpawnerPot>().enabled = true;
         pot2.GetComponent<EnemySpawnerPot>().enabled = true;
         Boss.SetActive(true);
-        lights.SetActive(true);
         //avoid errors when pots are destroyed
         activated = true;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (!activated && collision.gameObject.CompareTag("Player"))
+        if (!activated && other.gameObject.CompareTag("Player"))
         {
             activateScripts();
+            gameObject.SetActive(false);
         }
     }
 }

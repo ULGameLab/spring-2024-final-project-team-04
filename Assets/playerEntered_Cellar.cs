@@ -6,21 +6,20 @@ public class playerEntered_Cellar : MonoBehaviour
 { 
     private bool activated = false;
     public GameObject Boss;
-    public GameObject lights;
 
     void activateScripts()
     {
         Boss.SetActive(true);
-        lights.SetActive(true);
         //avoid errors when pots are destroyed
         activated = true;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (!activated && collision.gameObject.CompareTag("Player"))
+        if (!activated && other.gameObject.CompareTag("Player"))
         {
             activateScripts();
+            gameObject.SetActive(false);
         }
     }
 }

@@ -11,10 +11,11 @@ public class OrcBoss : MonoBehaviour
     //key stuff
     public GameObject goldKey;
 
-    //public AudioSource AttackSound;
-    //public AudioSource WalkSound;
-    //public AudioSource TakeDmgSound;
-    //public AudioSource DeathSound;
+    public AudioSource AttackSound;
+    public AudioSource WalkSound;
+    public AudioSource TakeDmgSound;
+    public AudioSource DeathSound;
+    public AudioSource SpinSound;
     public int currencyOnDeath = 10; // Currency amount to add when the enemy dies
     private CurrencyManager currencyManager;
 
@@ -141,9 +142,13 @@ public class OrcBoss : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= checkInterval && state != BossState.DEAD && Vector3.Distance(transform.position, player.transform.position) < 15)
         {
-            timer = -15f;
+            timer = -10f;
             state = BossState.SPECIAL;
             StartCoroutine(WaitForSpecial(5));
+        }
+        if (state != BossState.SPECIAL)
+        {
+            SpinSound.Stop();
         }
     }
 
@@ -151,6 +156,7 @@ public class OrcBoss : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Attack"))
         {
+            TakeDmgSound.Play();
             health -= 10;
             healthBar.UpdateHealthBar(health, maxHp);
             //animator.SetBool("takeDamage", true);
@@ -171,15 +177,18 @@ public class OrcBoss : MonoBehaviour
         }
         else if (col.CompareTag("GloveAttack") || col.CompareTag("GasArea"))
         {
+            TakeDmgSound.Play();
             gloveDamage = true;
             StartCoroutine(ApplyDamage());
         }
         else if (col.CompareTag("FlashAOE"))
         {
+            TakeDmgSound.Play();
             StartCoroutine(FlashBang());
         }
         else if (col.CompareTag("FireAttack"))
         {
+            TakeDmgSound.Play();
             health -= 10;
             healthBar.UpdateHealthBar(health, maxHp);
             //animator.SetBool("takeDamage", true);
@@ -261,6 +270,7 @@ public class OrcBoss : MonoBehaviour
 
     void Die()
     {
+        DeathSound.Play();
         if (currencyManager != null)
         {
             currencyManager.AddCurrency(currencyOnDeath);
@@ -297,6 +307,7 @@ public class OrcBoss : MonoBehaviour
 
     private IEnumerator WaitForSpecial(float waitTime)
     {
+        SpinSound.Play();
         yield return new WaitForSeconds(waitTime);
         animator.SetBool("Spin", false);
         if (state != BossState.DEAD)
@@ -306,4 +317,18 @@ public class OrcBoss : MonoBehaviour
         agent.speed = originSpeed;
     }
 
+    void attackSound()
+    {
+        AttackSound.Play();
+    }
+
+    void walkSound()
+    {
+        WalkSound.Play();
+    }
+
+    void spinSound()
+    {
+        SpinSound.Play();
+    }
 }

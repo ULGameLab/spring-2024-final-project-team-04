@@ -9,10 +9,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class CrabSpawn : MonoBehaviour
 {
-    //public AudioSource AttackSound;
-    //public AudioSource WalkSound;
-    //public AudioSource TakeDmgSound;
-    //public AudioSource DeathSound;
+    public AudioSource AttackSound;
+    public AudioSource WalkSound;
+    public AudioSource TakeDmgSound;
+    public AudioSource DeathSound;
     GameObject player;
     NavMeshAgent agent;
     public float chaseDistance = 50.0f;
@@ -135,6 +135,7 @@ public class CrabSpawn : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Attack"))
         {
+            TakeDmgSound.Play();
             health -= 10;
             healthBar.UpdateHealthBar(health, maxHp);
             //animator.SetBool("takeDamage", true);
@@ -155,6 +156,7 @@ public class CrabSpawn : MonoBehaviour
         }
         else if (col.CompareTag("GloveAttack") || col.CompareTag("GasArea"))
         {
+            TakeDmgSound.Play();
             gloveDamage = true;
             StartCoroutine(ApplyDamage());
         }
@@ -194,6 +196,7 @@ public class CrabSpawn : MonoBehaviour
 
     void Die()
     {
+        DeathSound.Play();
         if (currencyManager != null)
         {
             currencyManager.AddCurrency(currencyOnDeath);
@@ -211,6 +214,16 @@ public class CrabSpawn : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         isSinking = true;
+    }
+
+    void attackSound()
+    {
+        AttackSound.Play();
+    }
+
+    void walkSound()
+    {
+        WalkSound.Play();
     }
 
 }

@@ -27,7 +27,8 @@ public class Health : MonoBehaviour
     public static int keyCount = 0;
     public static int bossKeyCount = 0;
     public static int WinCondition = 0;
-    AudioSource potionDrink;
+    public AudioSource potionDrink;
+    public AudioSource bgm;
 
     public float enemyDamage = 10f;
     public float spawnDamage = 2f;
@@ -58,7 +59,7 @@ public class Health : MonoBehaviour
         WinCondition = 0;
         //
 
-        potionDrink = GetComponent<AudioSource>();
+        //potionDrink = GetComponent<AudioSource>();
 
         if (HealthBar != null)
         {
@@ -116,6 +117,15 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(FindFirstObjectByType<SpiderBoss>() || FindFirstObjectByType<OrcBoss>() || FindFirstObjectByType<CrabBoss>())
+        {
+            bgm.Pause();
+        }
+        else
+        {
+            bgm.UnPause();
+        }
+
         if (Input.GetKey(KeyCode.Backspace))
         {
             health = 0;

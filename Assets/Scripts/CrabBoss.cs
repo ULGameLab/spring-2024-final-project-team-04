@@ -15,10 +15,12 @@ public class CrabBoss : MonoBehaviour
     // Immunity
     private CrabSpawn support;
 
-    //public AudioSource AttackSound;
-    //public AudioSource WalkSound;
-    //public AudioSource TakeDmgSound;
-    //public AudioSource DeathSound;
+    public AudioSource AttackSound;
+    public AudioSource WalkSound;
+    public AudioSource TakeDmgSound;
+    public AudioSource DeathSound;
+    public AudioSource LaySound;
+    public AudioSource ImmuneSound;
     GameObject player;
     NavMeshAgent agent;
     public float chaseDistance = 50.0f;
@@ -151,6 +153,7 @@ public class CrabBoss : MonoBehaviour
         {
             if (col.gameObject.CompareTag("Attack"))
             {
+                TakeDmgSound.Play();
                 health -= 10;
                 healthBar.UpdateHealthBar(health, maxHp);
                 col.gameObject.SetActive(false);
@@ -161,8 +164,17 @@ public class CrabBoss : MonoBehaviour
             }
             else if (col.CompareTag("GloveAttack") || col.CompareTag("GasArea"))
             {
+                TakeDmgSound.Play();
                 gloveDamage = true;
                 StartCoroutine(ApplyDamage());
+            }
+        }
+        else
+        {
+            if (col.gameObject.CompareTag("Attack"))
+            {
+                ImmuneSound.Play();
+                Destroy(col.gameObject);
             }
         }
     }
@@ -201,6 +213,7 @@ public class CrabBoss : MonoBehaviour
 
     void Die()
     {
+        DeathSound.Play();
         if (currencyManager != null)
         {
             currencyManager.AddCurrency(currencyOnDeath);
@@ -235,10 +248,19 @@ public class CrabBoss : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void attackSound()
+    {
+        AttackSound.Play();
+    }
 
+    void walkSound()
+    {
+        WalkSound.Play();
+    }
 
     void LayEggs()
     {
+        LaySound.Play();
         Instantiate(EggsPrefab, layPoint.position, Quaternion.identity);
     }
 

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7516147023265018176, guid: 9122802f90381f84d8b8a93daaf9717a, type: 3}
       propertyPath: m_Name
-      value: Speed Potion Variant
+      value: Gas Potion
       objectReference: {fileID: 0}
     - target: {fileID: 7516147023265018176, guid: 9122802f90381f84d8b8a93daaf9717a, type: 3}
       propertyPath: m_TagString
@@ -124,7 +124,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5436faa016278d347a759a516b6a59d9, type: 3}
   m_Resource: {fileID: 8300000, guid: 5436faa016278d347a759a516b6a59d9, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

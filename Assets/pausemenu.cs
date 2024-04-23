@@ -28,13 +28,18 @@ public class pausemenu : MonoBehaviour
         // Optionally pause/unpause the game when the pause menu is activated/deactivated
         Time.timeScale = pauseMenuUI.activeSelf ? 0 : 1;
         paused = paused ? false : true;
-        if (paused) {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+        if (SceneManager.GetActiveScene().name != "Hub")
+        {
+            if (paused)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
         Debug.Log($"Paused: {paused}");
     }

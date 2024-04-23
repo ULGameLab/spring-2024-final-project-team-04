@@ -20,6 +20,7 @@ public class CrabBoss : MonoBehaviour
     public AudioSource TakeDmgSound;
     public AudioSource DeathSound;
     public AudioSource LaySound;
+    public AudioSource ImmuneSound;
     GameObject player;
     NavMeshAgent agent;
     public float chaseDistance = 50.0f;
@@ -166,6 +167,14 @@ public class CrabBoss : MonoBehaviour
                 TakeDmgSound.Play();
                 gloveDamage = true;
                 StartCoroutine(ApplyDamage());
+            }
+        }
+        else
+        {
+            if (col.gameObject.CompareTag("Attack"))
+            {
+                ImmuneSound.Play();
+                Destroy(col.gameObject);
             }
         }
     }

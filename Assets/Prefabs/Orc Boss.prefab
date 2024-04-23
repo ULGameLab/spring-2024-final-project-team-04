@@ -9030,7 +9030,7 @@ MonoBehaviour:
   currHealth: 0
   healthBar: {fileID: 4270876353206701663}
   speedMultiplier: 3
-  checkInterval: 10
+  checkInterval: 5
   fireEffect: {fileID: 100006, guid: ba1b9e2ea89c3ed46b0e18f4e6be1e1e, type: 3}
   gloveDamage: 0
   fireDamage: 0
@@ -10412,8 +10412,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.49903923, y: 0.526462, z: 0.6352378}
-  m_Center: {x: -0.049519237, y: 0.16323403, z: 0.3676263}
+  m_Size: {x: 0.57846206, y: 0.7277749, z: 0.6352378}
+  m_Center: {x: -0.08923032, y: 0.062578276, z: 0.36762628}
 --- !u!1 &5277553564442356803
 GameObject:
   m_ObjectHideFlags: 0

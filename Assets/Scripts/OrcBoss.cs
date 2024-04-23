@@ -142,7 +142,7 @@ public class OrcBoss : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= checkInterval && state != BossState.DEAD && Vector3.Distance(transform.position, player.transform.position) < 15)
         {
-            timer = -15f;
+            timer = -10f;
             state = BossState.SPECIAL;
             StartCoroutine(WaitForSpecial(5));
         }

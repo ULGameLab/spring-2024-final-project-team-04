@@ -8,8 +8,8 @@ public class WeaponSwap : MonoBehaviour
     public GameObject weapon2;
     public GameObject weapon3;
 
-    private bool w2unlocked = true;
-    private bool w3unlocked = true;
+    public bool w2unlocked = false;
+    public bool w3unlocked = false;
 
     // Start is called before the first frame update
     void Start()

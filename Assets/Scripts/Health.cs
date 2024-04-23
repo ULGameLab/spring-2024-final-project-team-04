@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     public GameObject FlashBomb;
     private static Image HealthBarImage;
     [SerializeField] 
-    private float health = 75.0f;
+    private float health = 100.0f;
     private float maxHealth = 100.0f;
     private float healVal = 10.0f;
     private static int healthPotCount = 0;

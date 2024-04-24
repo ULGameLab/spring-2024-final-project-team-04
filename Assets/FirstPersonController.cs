@@ -208,11 +208,7 @@ public class FirstPersonController : MonoBehaviour
     {
         if (pausemenu.paused == false)
         {
-            // Quit
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                EditorApplication.isPlaying = false;
-            }
+            
 
             #region Camera
 

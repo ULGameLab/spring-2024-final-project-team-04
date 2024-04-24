@@ -162,7 +162,7 @@ public class Health : MonoBehaviour
             health += 0.0625f;
         }
         if (WinCondition == 3) {
-            SceneManager.LoadScene("GameOver");//change to win screen later!!!!
+            SceneManager.LoadScene("Win Screen");
         }
     }
 

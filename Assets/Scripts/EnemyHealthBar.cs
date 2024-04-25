@@ -7,13 +7,15 @@ public class EnemyHealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private Camera cam;
+    [SerializeField] private Health player;
     //[SerializeField] private Transform target;
 
     private void Start()
     {
         if (!CompareTag("Boss"))
         {
-            cam = FindFirstObjectByType<Camera>();
+            player = FindFirstObjectByType<Health>();
+            cam = player.GetComponent<Camera>();
         }
     }
 

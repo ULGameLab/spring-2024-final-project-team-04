@@ -22,7 +22,7 @@ public class GasEmmision : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Gas_Ground"))
+        if (other.gameObject.CompareTag("Gas_Ground") || other.gameObject.CompareTag("Floor"))
         {
             GasArea.SetActive(true);
         }
